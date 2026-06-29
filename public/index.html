@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Breaker Tools Pro · Stop Breaking Blind</title>
+  <meta name="description" content="The operating system for serious card breakers. Know your profit before, during, and after every break. No spreadsheets. No guesswork." />
+  <meta property="og:title" content="Breaker Tools Pro · Stop Breaking Blind" />
+  <meta property="og:description" content="The all-in-one operating system for card breakers. Plan, run, and review every break in one place." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:#060B17; --bg-2:#080E1D; --surface:#0A1322; --card:#0E1B30; --card-2:#122544; --card-hover:#15294A;
+      --border:rgba(96,165,250,.13); --border-md:rgba(96,165,250,.26); --border-str:rgba(96,165,250,.46);
+      --blue:#3B82F6; --blue-lt:#60A5FA; --blue-br:#7DB1FF; --blue-dk:#1D4ED8; --cyan:#22D3EE; --glow:rgba(59,130,246,.30);
+      --text:#F4F8FF; --text-2:#9FB0C9; --text-3:#5E708C;
+      --green:#10B981; --green-lt:#34D399; --green-bg:rgba(16,185,129,.12); --green-bd:rgba(16,185,129,.34);
+      --red:#F05252; --red-bg:rgba(240,82,82,.10); --amber:#FBBF24; --amber-bg:rgba(251,191,36,.12); --amber-bd:rgba(251,191,36,.30); --purple:#A78BFA;
+      --r:12px; --r-lg:18px; --r-xl:26px; --maxw:1180px;
+    }
+    html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+    body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.65; overflow-x:hidden; position:relative; }
+    body::after { content:''; position:fixed; inset:0; z-index:9000; pointer-events:none; opacity:.035;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    .container { max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+    .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    @keyframes pulseDot { 0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,.55)} 50%{box-shadow:0 0 0 7px rgba(16,185,129,0)} }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+    @keyframes floatSlow { 0%,100%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-14px) rotate(1.5deg)} }
+    @keyframes auroraA { 0%{transform:translate(-12%,-8%) scale(1)} 50%{transform:translate(10%,6%) scale(1.18)} 100%{transform:translate(-12%,-8%) scale(1)} }
+    @keyframes auroraB { 0%{transform:translate(14%,10%) scale(1.1)} 50%{transform:translate(-10%,-6%) scale(.92)} 100%{transform:translate(14%,10%) scale(1.1)} }
+    @keyframes shimmer { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+    @keyframes shine { 0%{transform:translateX(-120%) skewX(-18deg)} 60%,100%{transform:translateX(220%) skewX(-18deg)} }
+    @keyframes glowPulse { 0%,100%{opacity:.5} 50%{opacity:1} }
+    .reveal { opacity:0; transform:translateY(30px); transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .rd-1{transition-delay:.08s} .rd-2{transition-delay:.16s} .rd-3{transition-delay:.24s} .rd-4{transition-delay:.32s} .rd-5{transition-delay:.40s}
+    .pain-grid .pain-card:nth-child(1){transition-delay:.04s} .pain-grid .pain-card:nth-child(2){transition-delay:.10s} .pain-grid .pain-card:nth-child(3){transition-delay:.16s}
+    .pain-grid .pain-card:nth-child(4){transition-delay:.22s} .pain-grid .pain-card:nth-child(5){transition-delay:.28s} .pain-grid .pain-card:nth-child(6){transition-delay:.34s}
+    @media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none!important;transition:none!important} .reveal{opacity:1;transform:none} }
+
+    /* NAV */
+    nav { position:fixed; top:0; left:0; right:0; z-index:500; padding:16px 0; transition:background .35s,border-color .35s,padding .35s; border-bottom:1px solid transparent; }
+    nav.scrolled { background:rgba(6,11,23,.78); backdrop-filter:blur(18px) saturate(140%); border-bottom:1px solid var(--border); padding:11px 0; }
+    .nav-inner { display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .nav-logo { display:flex; align-items:center; gap:11px; text-decoration:none; }
+    .nav-logo-icon { width:38px; height:38px; border-radius:10px; background:linear-gradient(135deg,var(--blue),var(--blue-dk)); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px var(--glow); }
+    .nav-wordmark { font-size:13px; font-weight:900; letter-spacing:.05em; line-height:1.12; color:var(--text); font-family:'Sora',sans-serif; }
+    .nav-wordmark span { color:var(--blue-lt); }
+    .nav-links { display:flex; align-items:center; gap:30px; list-style:none; }
+    .nav-links a { color:var(--text-2); text-decoration:none; font-size:14px; font-weight:500; position:relative; transition:color .2s; }
+    .nav-links a::after { content:''; position:absolute; left:0; bottom:-5px; height:2px; width:0; background:var(--blue-lt); border-radius:2px; transition:width .25s; }
+    .nav-links a:hover { color:var(--text); } .nav-links a:hover::after { width:100%; }
+    .nav-actions { display:flex; align-items:center; gap:8px; }
+    .btn-ghost { color:var(--text-2); text-decoration:none; font-size:14px; font-weight:500; padding:9px 16px; border-radius:9px; transition:color .2s,background .2s; }
+    .btn-ghost:hover { color:var(--text); background:var(--card); }
+    .btn-primary { position:relative; overflow:hidden; background:linear-gradient(135deg,var(--blue),var(--blue-dk)); color:#fff; text-decoration:none; font-weight:800; display:inline-flex; align-items:center; gap:9px; border-radius:12px; border:1px solid rgba(125,177,255,.4); box-shadow:0 8px 30px var(--glow),inset 0 1px 0 rgba(255,255,255,.18); transition:transform .18s cubic-bezier(.16,1,.3,1),box-shadow .25s; }
+    .btn-primary::before { content:''; position:absolute; top:0; bottom:0; width:50%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent); animation:shine 4.5s ease-in-out infinite; }
+    .btn-primary:hover { transform:translateY(-3px); box-shadow:0 16px 46px rgba(59,130,246,.5),inset 0 1px 0 rgba(255,255,255,.25); }
+    .btn-nav { font-size:14px; padding:10px 20px; }
+    .btn-lg { font-size:17px; padding:17px 34px; }
+    .btn-outline { color:var(--text); text-decoration:none; font-weight:600; border:1px solid var(--border-md); border-radius:12px; display:inline-flex; align-items:center; gap:9px; background:rgba(96,165,250,.04); transition:color .2s,border-color .2s,background .2s,transform .18s; }
+    .btn-outline:hover { border-color:var(--blue); background:rgba(59,130,246,.1); transform:translateY(-2px); }
+    .btn-outline.btn-lg { font-size:17px; padding:17px 34px; }
+
+    /* HERO */
+    .hero { position:relative; min-height:100vh; display:flex; align-items:center; padding:170px 0 90px; overflow:hidden; }
+    .aurora { position:absolute; inset:-20%; z-index:0; pointer-events:none; filter:blur(70px); }
+    .aurora i { position:absolute; border-radius:50%; opacity:.5; }
+    .aurora .a1 { width:620px; height:620px; left:8%; top:-8%; background:radial-gradient(circle,rgba(59,130,246,.55),transparent 62%); animation:auroraA 16s ease-in-out infinite; }
+    .aurora .a2 { width:560px; height:560px; right:6%; top:6%; background:radial-gradient(circle,rgba(34,211,238,.34),transparent 62%); animation:auroraB 19s ease-in-out infinite; }
+    .aurora .a3 { width:520px; height:520px; left:38%; bottom:-18%; background:radial-gradient(circle,rgba(124,58,237,.30),transparent 62%); animation:auroraA 22s ease-in-out infinite; }
+    .hero-grid { position:absolute; inset:0; z-index:0; pointer-events:none; background-image:linear-gradient(rgba(96,165,250,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(96,165,250,.05) 1px,transparent 1px); background-size:60px 60px; mask-image:radial-gradient(ellipse 70% 60% at 50% 35%,black 30%,transparent 78%); }
+    .spotlight { position:absolute; width:600px; height:600px; border-radius:50%; pointer-events:none; z-index:1; background:radial-gradient(circle,rgba(96,165,250,.10),transparent 60%); transform:translate(-50%,-50%); transition:opacity .4s; opacity:0; }
+    .hero-content { position:relative; z-index:2; text-align:center; max-width:940px; margin:0 auto; }
+    .hero-badge { display:inline-flex; align-items:center; gap:9px; background:rgba(96,165,250,.08); border:1px solid rgba(96,165,250,.3); border-radius:999px; padding:7px 8px 7px 14px; font-size:13px; font-weight:600; color:var(--blue-br); margin-bottom:30px; animation:fadeIn .8s ease both; backdrop-filter:blur(8px); }
+    .badge-dot { width:7px; height:7px; background:var(--green); border-radius:50%; animation:pulseDot 2s infinite; }
+    .badge-pill { background:rgba(96,165,250,.16); color:var(--blue-br); font-size:11px; font-weight:800; padding:3px 9px; border-radius:999px; letter-spacing:.02em; }
+    .hero-h1 { font-family:'Sora',sans-serif; font-size:clamp(54px,9.5vw,104px); font-weight:800; letter-spacing:-.045em; line-height:.96; margin-bottom:26px; animation:fadeUp .85s cubic-bezier(.16,1,.3,1) .08s both; }
+    .hero-h1 .accent { background:linear-gradient(110deg,var(--blue-lt) 10%,var(--cyan) 40%,var(--blue-br) 70%,var(--blue-lt) 90%); background-size:200% auto; -webkit-background-clip:text; background-clip:text; color:transparent; animation:shimmer 4.5s linear infinite; }
+    .hero-sub { font-size:clamp(17px,2.3vw,21px); color:var(--text-2); max-width:600px; margin:0 auto 40px; line-height:1.62; animation:fadeUp .85s cubic-bezier(.16,1,.3,1) .2s both; }
+    .hero-ctas { display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; margin-bottom:20px; animation:fadeUp .85s cubic-bezier(.16,1,.3,1) .3s both; }
+    .hero-note { font-size:13px; color:var(--text-3); display:flex; gap:18px; justify-content:center; flex-wrap:wrap; animation:fadeUp .85s cubic-bezier(.16,1,.3,1) .4s both; }
+    .hero-note span { display:inline-flex; align-items:center; gap:6px; } .hero-note svg { color:var(--green-lt); }
+    .hero-visual { margin-top:66px; position:relative; z-index:2; animation:fadeUp 1.1s cubic-bezier(.16,1,.3,1) .5s both; }
+    .frame { position:relative; border-radius:var(--r-xl); padding:1px; background:linear-gradient(160deg,rgba(96,165,250,.55),rgba(96,165,250,.04) 40%,transparent 70%); box-shadow:0 50px 130px rgba(0,0,0,.7); }
+    .frame-inner { border-radius:calc(var(--r-xl) - 1px); overflow:hidden; background:var(--surface); }
+    .frame-inner img { width:100%; display:block; }
+    .shot-ph { aspect-ratio:16/9; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; color:var(--text-3); font-size:13.5px; text-align:center; padding:20px; background:radial-gradient(ellipse at 50% 0%,rgba(59,130,246,.08),transparent 70%),var(--surface); }
+    .shot-ph svg { opacity:.3; }
+    .float-chip { position:absolute; background:rgba(14,27,48,.88); backdrop-filter:blur(12px); border:1px solid var(--border-md); border-radius:14px; padding:13px 17px; display:flex; align-items:center; gap:11px; box-shadow:0 16px 40px rgba(0,0,0,.5); z-index:3; }
+    .float-chip .fc-ico { width:36px; height:36px; border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .float-chip .fc-val { font-size:18px; font-weight:900; font-family:'Sora',sans-serif; letter-spacing:-.02em; line-height:1; }
+    .float-chip .fc-lbl { font-size:11px; color:var(--text-3); margin-top:3px; }
+    .fc-1 { left:-30px; top:24%; animation:floatSlow 6s ease-in-out infinite; }
+    .fc-2 { right:-24px; top:56%; animation:floatSlow 7s ease-in-out infinite .8s; }
+
+    /* STATS */
+    .stats { background:linear-gradient(180deg,var(--bg-2),var(--bg)); padding:68px 0; border-bottom:1px solid var(--border); }
+    .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:20px; }
+    .stat-card { position:relative; text-align:center; padding:32px 20px; border-radius:var(--r-lg); background:linear-gradient(180deg,rgba(14,27,48,.7),rgba(14,27,48,.25)); border:1px solid var(--border); overflow:hidden; }
+    .stat-card.hl { border-color:var(--border-str); background:linear-gradient(180deg,rgba(59,130,246,.10),rgba(14,27,48,.3)); }
+    .stat-card::before { content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:60%; height:1px; background:linear-gradient(90deg,transparent,var(--blue-lt),transparent); opacity:.6; }
+    .stat-num { font-family:'Sora',sans-serif; font-size:44px; font-weight:800; letter-spacing:-.04em; line-height:1; background:linear-gradient(120deg,#fff,var(--blue-br)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .stat-lbl { font-size:13.5px; color:var(--text-2); margin-top:10px; line-height:1.5; }
+
+    /* SECTION SHARED */
+    section { padding:104px 0; position:relative; }
+    .s-label { display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--blue-lt); margin-bottom:16px; }
+    .s-label::before { content:''; width:18px; height:2px; background:linear-gradient(90deg,var(--blue),transparent); border-radius:2px; }
+    .s-title { font-family:'Sora',sans-serif; font-size:clamp(31px,5vw,54px); font-weight:800; letter-spacing:-.035em; line-height:1.06; margin-bottom:18px; }
+    .s-sub { font-size:18px; color:var(--text-2); line-height:1.66; }
+    .center { text-align:center; } .center .s-label { justify-content:center; }
+
+    /* PROBLEM */
+    .problem { background:var(--surface); }
+    .pain-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:18px; }
+    .pain-card { position:relative; background:linear-gradient(180deg,var(--card),rgba(14,27,48,.4)); border:1px solid var(--border); border-radius:var(--r-lg); padding:30px; transition:border-color .35s,transform .35s,box-shadow .35s; }
+    .pain-card:hover { border-color:rgba(240,82,82,.4); transform:translateY(-6px); box-shadow:0 24px 60px rgba(0,0,0,.4); }
+    .pain-ico { width:50px; height:50px; border-radius:13px; background:var(--red-bg); border:1px solid rgba(240,82,82,.22); display:flex; align-items:center; justify-content:center; color:#FCA5A5; margin-bottom:20px; }
+    .pain-card h3 { font-size:18px; font-weight:800; margin-bottom:9px; font-family:'Sora',sans-serif; letter-spacing:-.01em; }
+    .pain-card p { font-size:14.5px; color:var(--text-2); line-height:1.62; }
+
+    /* STEPS */
+    .steps-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; }
+    .step { position:relative; background:linear-gradient(180deg,var(--card),rgba(14,27,48,.35)); border:1px solid var(--border); border-radius:var(--r-lg); padding:34px 30px; transition:transform .35s,border-color .35s; }
+    .step:hover { transform:translateY(-6px); border-color:var(--border-str); }
+    .step-num { width:50px; height:50px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-family:'Sora',sans-serif; font-size:20px; font-weight:800; color:#fff; margin-bottom:18px; background:linear-gradient(135deg,var(--blue),var(--blue-dk)); box-shadow:0 8px 22px var(--glow); }
+    .step h3 { font-size:19px; font-weight:800; margin-bottom:10px; font-family:'Sora',sans-serif; letter-spacing:-.01em; }
+    .step p { font-size:15px; color:var(--text-2); line-height:1.62; }
+    .step ul { list-style:none; margin-top:14px; display:flex; flex-direction:column; gap:7px; }
+    .step ul li { font-size:13.5px; color:var(--text-3); display:flex; gap:8px; } .step ul li::before { content:'·'; color:var(--blue-lt); }
+
+    /* VIDEO */
+    .vid { background:var(--bg-2); }
+    .vid-wrap { max-width:920px; margin:0 auto; }
+    .vid-frame { cursor:pointer; }
+    .vid-ph { aspect-ratio:16/9; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; position:relative; background:radial-gradient(ellipse at 50% 50%,rgba(59,130,246,.10),transparent 70%),var(--surface); transition:background .3s; }
+    .vid-frame:hover .vid-ph { background:radial-gradient(ellipse at 50% 50%,rgba(59,130,246,.16),transparent 70%),var(--surface); }
+    .vid-play { width:78px; height:78px; border-radius:50%; background:linear-gradient(135deg,var(--blue),var(--blue-dk)); display:flex; align-items:center; justify-content:center; box-shadow:0 12px 40px var(--glow); animation:float 3s ease-in-out infinite; transition:transform .2s; }
+    .vid-frame:hover .vid-play { transform:scale(1.1); }
+    .vid-ph span { font-size:13px; color:var(--text-3); }
+
+    /* FEATURE ROWS */
+    .feat-row { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; padding:60px 0; }
+    .feat-row + .feat-row { border-top:1px solid var(--border); }
+    .feat-row.rev .feat-txt { order:2; }
+    .feat-txt h2 { font-family:'Sora',sans-serif; font-size:clamp(26px,3.6vw,40px); font-weight:800; letter-spacing:-.03em; line-height:1.12; margin-bottom:15px; }
+    .feat-txt > p { font-size:16px; color:var(--text-2); line-height:1.7; margin-bottom:22px; }
+    .feat-pts { list-style:none; display:flex; flex-direction:column; gap:12px; }
+    .feat-pts li { display:flex; align-items:flex-start; gap:12px; font-size:15px; color:var(--text-2); }
+    .check { flex-shrink:0; width:22px; height:22px; border-radius:50%; background:var(--green-bg); border:1px solid var(--green-bd); display:flex; align-items:center; justify-content:center; margin-top:1px; }
+    .feat-vis { position:relative; }
+    .feat-tag { display:inline-flex; align-items:center; gap:9px; font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--blue-lt); background:rgba(59,130,246,.1); border:1px solid var(--border-md); border-radius:999px; padding:6px 14px; margin-bottom:18px; }
+    .feat-tag svg { width:15px; height:15px; }
+
+    /* COMPARE */
+    .compare { background:var(--surface); }
+    .cmp-table { display:grid; grid-template-columns:1fr 1fr; border-radius:var(--r-lg); overflow:hidden; border:1px solid var(--border); }
+    .cmp-hd { padding:22px 30px; font-size:15px; font-weight:800; display:flex; align-items:center; gap:10px; font-family:'Sora',sans-serif; }
+    .cmp-before .cmp-hd { background:var(--red-bg); color:#FCA5A5; border-right:1px solid var(--border); }
+    .cmp-after .cmp-hd { background:var(--green-bg); color:var(--green-lt); }
+    .cmp-cell { padding:16px 30px; font-size:14.5px; color:var(--text-2); border-top:1px solid var(--border); display:flex; align-items:flex-start; gap:11px; line-height:1.5; }
+    .cmp-before .cmp-cell { border-right:1px solid var(--border); }
+    .cmp-after .cmp-cell { background:rgba(16,185,129,.03); }
+    .ci { flex-shrink:0; margin-top:1px; }
+
+    /* SPEED */
+    .speed { background:radial-gradient(ellipse 80% 60% at 50% 100%,rgba(59,130,246,.08),transparent 60%),var(--bg); }
+    .speed-inner { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
+    .speed-clock { position:relative; aspect-ratio:1; max-width:290px; margin:0 auto; display:flex; align-items:center; justify-content:center; }
+    .clock-ring { position:absolute; inset:0; border-radius:50%; border:2px solid var(--border); }
+    .clock-fill { position:absolute; inset:0; border-radius:50%; background:conic-gradient(var(--blue) 0deg,transparent 0deg); -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 12px),#000 calc(100% - 11px)); mask:radial-gradient(farthest-side,transparent calc(100% - 12px),#000 calc(100% - 11px)); }
+    .clock-num { position:relative; z-index:3; font-family:'Sora',sans-serif; text-align:center; }
+    .clock-num b { display:block; font-size:74px; font-weight:800; letter-spacing:-.04em; line-height:1; background:linear-gradient(120deg,#fff,var(--blue-br)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .clock-num span { font-size:14px; color:var(--text-2); }
+    .speed-steps { list-style:none; display:flex; flex-direction:column; gap:14px; }
+    .speed-steps li { display:flex; align-items:center; gap:14px; font-size:16px; color:var(--text); }
+    .ss-n { flex-shrink:0; width:34px; height:34px; border-radius:50%; background:rgba(59,130,246,.12); border:1px solid var(--border-md); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:800; color:var(--blue-lt); }
+
+    /* AVATARS */
+    .avatar-grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+    .av-card { position:relative; overflow:hidden; background:linear-gradient(180deg,var(--card),rgba(14,27,48,.4)); border:1px solid var(--border); border-radius:var(--r-xl); padding:40px; transition:border-color .35s,transform .35s,box-shadow .35s; }
+    .av-card:hover { border-color:var(--blue); transform:translateY(-6px); box-shadow:0 30px 70px rgba(0,0,0,.45); }
+    .av-tag { display:inline-block; font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--blue-lt); background:rgba(59,130,246,.1); border:1px solid var(--border); border-radius:999px; padding:5px 13px; margin-bottom:18px; }
+    .av-card h3 { font-family:'Sora',sans-serif; font-size:23px; font-weight:800; letter-spacing:-.02em; margin-bottom:13px; line-height:1.2; }
+    .av-card > p { font-size:15px; color:var(--text-2); line-height:1.68; margin-bottom:24px; }
+    .av-pts { list-style:none; display:flex; flex-direction:column; gap:12px; }
+    .av-pts li { font-size:14.5px; color:var(--text-2); display:flex; align-items:flex-start; gap:11px; } .av-pts .check { width:20px; height:20px; }
+
+    /* PRICING */
+    .pricing { background:var(--surface); }
+    .slap { max-width:760px; margin:0 auto 48px; text-align:center; }
+    .val-stack { background:linear-gradient(180deg,var(--card),rgba(14,27,48,.4)); border:1px solid var(--border-md); border-radius:var(--r-xl); overflow:hidden; text-align:left; }
+    .vs-top { display:flex; justify-content:space-between; align-items:center; padding:18px 28px; background:rgba(59,130,246,.07); border-bottom:1px solid var(--border); }
+    .vs-top h3 { font-size:15px; font-weight:800; font-family:'Sora',sans-serif; } .vs-top span { font-size:12px; color:var(--text-3); }
+    .vrow { display:flex; justify-content:space-between; align-items:center; padding:13px 28px; border-bottom:1px solid var(--border); font-size:14.5px; }
+    .vrow .vn { color:var(--text-2); display:flex; align-items:center; gap:11px; } .vrow .vp { color:var(--text-3); font-size:13px; }
+    .vn .dot { width:7px; height:7px; border-radius:50%; background:var(--blue-lt); flex-shrink:0; }
+    .vrow.bonus { background:rgba(251,191,36,.04); } .vrow.bonus .vn { color:var(--amber); } .vrow.bonus .vp { color:var(--amber); font-weight:700; } .vrow.bonus .dot { background:var(--amber); }
+    .vs-total { display:flex; justify-content:space-between; align-items:center; padding:20px 28px; background:rgba(59,130,246,.06); }
+    .vs-total span:first-child { font-size:16px; font-weight:800; font-family:'Sora',sans-serif; }
+    .vs-total .tv { font-family:'Sora',sans-serif; font-size:28px; font-weight:800; letter-spacing:-.03em; color:var(--text); }
+    .slap-line { margin:36px auto 8px; font-size:clamp(19px,2.6vw,26px); font-weight:600; color:var(--text-2); line-height:1.5; max-width:600px; }
+    .slap-line b { color:var(--text); font-weight:800; } .slap-line s { color:var(--text-3); text-decoration-color:var(--red); }
+    .slap-price { font-family:'Sora',sans-serif; font-size:clamp(60px,11vw,104px); font-weight:800; letter-spacing:-.05em; line-height:1; margin-top:8px; background:linear-gradient(120deg,#fff 20%,var(--blue-br)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .slap-price small { font-size:24px; color:var(--text-3); -webkit-text-fill-color:var(--text-3); }
+    .slot-wrap { max-width:460px; margin:34px auto 44px; }
+    .slot-row { display:flex; justify-content:space-between; font-size:13px; color:var(--text-2); margin-bottom:9px; }
+    .slot-count { color:#FCA5A5; font-weight:800; }
+    .slot-bar { height:8px; background:var(--card); border-radius:999px; overflow:hidden; border:1px solid var(--border); }
+    .slot-fill { height:100%; width:72%; border-radius:999px; background:linear-gradient(90deg,var(--blue),var(--cyan)); box-shadow:0 0 16px var(--glow); }
+    .price-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(265px,1fr)); gap:20px; max-width:920px; margin:0 auto; }
+    .pcard { position:relative; background:linear-gradient(180deg,var(--card),rgba(14,27,48,.35)); border:1px solid var(--border); border-radius:var(--r-xl); padding:36px 32px; transition:transform .35s,border-color .35s; }
+    .pcard:hover { transform:translateY(-6px); }
+    .pcard.feat { border-color:transparent; }
+    .pcard.feat::before { content:''; position:absolute; inset:0; border-radius:var(--r-xl); padding:2px; background:linear-gradient(135deg,var(--blue),var(--cyan),var(--blue)); -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; }
+    .pc-badge { position:absolute; top:-13px; left:50%; transform:translateX(-50%); white-space:nowrap; background:linear-gradient(135deg,var(--blue),var(--blue-dk)); color:#fff; font-size:11px; font-weight:800; padding:5px 18px; border-radius:999px; letter-spacing:.04em; box-shadow:0 6px 18px var(--glow); }
+    .pc-lbl { font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--text-3); margin-bottom:10px; }
+    .pc-price { display:flex; align-items:baseline; gap:5px; margin-bottom:5px; font-family:'Sora',sans-serif; }
+    .pc-amt { font-size:52px; font-weight:800; letter-spacing:-.04em; line-height:1; }
+    .pc-per { font-size:17px; color:var(--text-3); }
+    .pc-note { font-size:13px; color:var(--text-3); margin-bottom:26px; min-height:20px; }
+    .pc-cta { display:flex; justify-content:center; text-align:center; padding:14px; border-radius:11px; font-size:15px; font-weight:800; text-decoration:none; margin-bottom:18px; }
+    .pc-fine { font-size:12px; color:var(--text-3); text-align:center; }
+
+    /* TESTIMONIALS */
+    .testi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; }
+    .t-card { background:linear-gradient(180deg,var(--card),rgba(14,27,48,.4)); border:1px solid var(--border); border-radius:var(--r-lg); padding:30px; transition:transform .35s,border-color .35s; }
+    .t-card:hover { transform:translateY(-5px); border-color:var(--border-md); }
+    .t-card.featured { border-color:var(--border-str); background:linear-gradient(180deg,rgba(59,130,246,.07),rgba(14,27,48,.4)); }
+    .t-stars { color:var(--amber); font-size:16px; letter-spacing:2px; margin-bottom:15px; }
+    .t-text { font-size:15.5px; color:var(--text); line-height:1.72; margin-bottom:22px; }
+    .t-author { display:flex; align-items:center; gap:12px; }
+    .t-av { width:44px; height:44px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:800; color:#fff; background:linear-gradient(135deg,var(--blue),var(--blue-dk)); }
+    .t-name { font-size:14px; font-weight:800; } .t-handle { font-size:12px; color:var(--text-3); margin-top:2px; }
+
+    /* GUARANTEE */
+    .guar { background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(16,185,129,.06),transparent 60%),var(--bg-2); }
+    .guar-inner { display:grid; grid-template-columns:auto 1fr; gap:48px; align-items:center; max-width:880px; margin:0 auto; background:linear-gradient(180deg,var(--card),rgba(14,27,48,.4)); border:1px solid var(--green-bd); border-radius:var(--r-xl); padding:46px; }
+    .seal { width:150px; height:150px; flex-shrink:0; position:relative; animation:floatSlow 6s ease-in-out infinite; }
+    .guar-txt h2 { font-family:'Sora',sans-serif; font-size:clamp(25px,3.5vw,34px); font-weight:800; letter-spacing:-.03em; margin-bottom:13px; }
+    .guar-txt p { font-size:16px; color:var(--text-2); line-height:1.7; }
+
+    /* FAQ */
+    .faq-list { max-width:760px; margin:0 auto; }
+    .faq-item { border:1px solid var(--border); border-radius:var(--r); margin-bottom:12px; background:var(--card); overflow:hidden; transition:border-color .25s; }
+    .faq-item.open { border-color:var(--border-str); }
+    .faq-q { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:21px 24px; cursor:pointer; font-size:16.5px; font-weight:700; color:var(--text); list-style:none; user-select:none; font-family:'Sora',sans-serif; transition:color .2s; }
+    .faq-q:hover { color:var(--blue-lt); }
+    .faq-chevron { width:20px; height:20px; min-width:20px; color:var(--text-3); transition:transform .3s; }
+    .faq-item.open .faq-chevron { transform:rotate(180deg); color:var(--blue-lt); }
+    .faq-a { font-size:15px; color:var(--text-2); line-height:1.72; max-height:0; overflow:hidden; padding:0 24px; transition:max-height .4s ease,padding .3s; }
+    .faq-item.open .faq-a { max-height:340px; padding:0 24px 22px; }
+
+    /* FINAL */
+    .final { text-align:center; padding:140px 0; position:relative; overflow:hidden; }
+    .final .aurora i { opacity:.35; }
+    .final-inner { position:relative; z-index:2; }
+    .final h2 { font-family:'Sora',sans-serif; font-size:clamp(36px,6.5vw,72px); font-weight:800; letter-spacing:-.05em; line-height:1.02; margin-bottom:20px; }
+    .final h2 .accent { background:linear-gradient(110deg,var(--blue-lt),var(--cyan),var(--blue-br)); background-size:200% auto; -webkit-background-clip:text; background-clip:text; color:transparent; animation:shimmer 4.5s linear infinite; }
+    .final p { font-size:18px; color:var(--text-2); max-width:480px; margin:0 auto 36px; }
+    .final-btns { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:18px; }
+
+    /* FOOTER */
+    footer { background:var(--surface); border-top:1px solid var(--border); padding:46px 0; }
+    .foot-inner { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:22px; }
+    .foot-links { display:flex; gap:26px; list-style:none; }
+    .foot-links a { font-size:13px; color:var(--text-3); text-decoration:none; transition:color .2s; } .foot-links a:hover { color:var(--text-2); }
+    .foot-copy { font-size:13px; color:var(--text-3); }
+
+    @media (max-width:980px){ .feat-row{grid-template-columns:1fr;gap:36px;padding:48px 0} .feat-row.rev .feat-txt{order:0} .feat-vis{order:-1} .speed-inner{grid-template-columns:1fr;gap:40px} }
+    @media (max-width:860px){ .nav-links{display:none} .avatar-grid{grid-template-columns:1fr} .cmp-table{grid-template-columns:1fr} .cmp-before .cmp-cell{border-right:none} .guar-inner{grid-template-columns:1fr;text-align:center;padding:36px 28px} .seal{margin:0 auto} .fc-1,.fc-2{display:none} }
+    @media (max-width:480px){ section{padding:78px 0} .hero{padding:140px 0 70px} .btn-lg{width:100%;justify-content:center} .hero-ctas{flex-direction:column} .price-cards{grid-template-columns:1fr} .final-btns{flex-direction:column;align-items:center} .final-btns .btn-lg{width:100%} }
+  </style>
+</head>
+<body>
+<a class="sr-only" href="#features">Skip to content</a>
+
+<!-- NAV -->
+<nav id="main-nav" aria-label="Main navigation">
+  <div class="container"><div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Breaker Tools Pro home">
+      <span class="nav-logo-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M11.5 2.5L4 11h7.5L9 17.5 18 8h-8L11.5 2.5z" fill="white"/></svg></span>
+      <span class="nav-wordmark">BREAKER<br><span>TOOLS PRO</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="https://app.breakertools.pro/login" class="btn-ghost">Log in</a>
+      <a href="https://app.breakertools.pro/login?signup=1&amp;next=billing" class="btn-primary btn-nav">Start free trial</a>
+    </div>
+  </div></div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="spotlight" id="spotlight" aria-hidden="true"></div>
+  <div class="container"><div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot" aria-hidden="true"></span>
+      The operating system for card breakers
+      <span class="badge-pill">25 founder spots open</span>
+    </div>
+    <h1 class="hero-h1">Stop Breaking<br><span class="accent">Blind.</span></h1>
+    <p class="hero-sub">Know exactly where your profit stands before, during, and after every break, for the first time. No spreadsheets. No sticky notes. No guesswork.</p>
+    <div class="hero-ctas">
+      <a href="https://app.breakertools.pro/login?signup=1&amp;next=billing" class="btn-primary btn-lg">Start your free trial<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="https://app.breakertools.pro/calculator" class="btn-outline btn-lg">Try the Break Calculator free</a>
+    </div>
+    <div class="hero-note">
+      <span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7.5l2.5 2.5L11 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> 7-day free trial</span>
+      <span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7.5l2.5 2.5L11 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Zero Risk Guarantee</span>
+      <span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7.5l2.5 2.5L11 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Cancel anytime</span>
+    </div>
+    <div class="hero-visual">
+      <div class="float-chip fc-1" aria-hidden="true"><span class="fc-ico" style="background:var(--green-bg);color:var(--green-lt)"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2v14M5 5.5c0-1.4 1.8-2.5 4-2.5s4 1.1 4 2.5S11.2 8 9 8.5 5 9.6 5 11s1.8 2.5 4 2.5 4-1.1 4-2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span><span class="fc-val" style="color:var(--green-lt)" data-counter="1284" data-prefix="+$">+$0</span><span class="fc-lbl">Live profit this break</span></span></div>
+      <div class="float-chip fc-2" aria-hidden="true"><span class="fc-ico" style="background:rgba(59,130,246,.14);color:var(--blue-lt)"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.6"/><path d="M9 5v4l3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><span class="fc-val">10 hrs</span><span class="fc-lbl">Saved this set</span></span></div>
+      <div class="frame">
+        <div class="frame-inner">
+          <img src="shot-dashboard.jpg" alt="Breaker Tools Pro dashboard showing planned breaks, profit, and inventory on hand" loading="eager" />
+        </div>
+      </div>
+    </div>
+  </div></div>
+</header>
+
+<!-- STATS -->
+<section class="stats" aria-label="Key stats" style="padding:68px 0">
+  <div class="container"><div class="stats-grid">
+    <div class="stat-card hl reveal"><div class="stat-num" data-counter="5276" data-prefix="$">$0</div><div class="stat-lbl">In tools &amp; value, all included for $39/mo</div></div>
+    <div class="stat-card reveal rd-1"><div class="stat-num" data-counter="100" data-suffix="+ hrs">0</div><div class="stat-lbl">Saved per year on break-list building alone</div></div>
+    <div class="stat-card reveal rd-2"><div class="stat-num" data-counter="9" data-suffix="-in-1">0</div><div class="stat-lbl">Tools replaced by one connected system</div></div>
+    <div class="stat-card reveal rd-3"><div class="stat-num" data-counter="5" data-suffix=" min">0</div><div class="stat-lbl">From signup to your first profit plan</div></div>
+  </div></div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem" aria-labelledby="prob-title">
+  <div class="container">
+    <div class="center reveal" style="max-width:560px;margin:0 auto 64px">
+      <div class="s-label">The problem</div>
+      <h2 class="s-title" id="prob-title">Most breakers are flying in the dark.</h2>
+      <p class="s-sub">You're juggling ChatGPT, spreadsheets, sticky notes, and three different apps, and still don't know if you made money until the break is already over.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card reveal"><span class="pain-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 3l18 18M10.6 5.1A9.8 9.8 0 0 1 12 5c5 0 9 4.5 10 7-.4 1-1.3 2.4-2.7 3.7M6.6 6.6C4.3 8 2.7 10 2 12c1 2.5 5 7 10 7 1.6 0 3-.4 4.3-1.1M9.9 9.9a3 3 0 0 0 4.2 4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3>No profit visibility</h3><p>You don't know if you're in the green until hours after the show ends. By then it's too late to steer.</p></div>
+      <div class="pain-card reveal rd-1"><span class="pain-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M3 9h18M3 14h18M9 4v16M15 4v16" stroke="currentColor" stroke-width="1.7"/></svg></span><h3>Death by spreadsheet</h3><p>Manual tracking, copy-paste math, broken formulas. Your business runs on guesswork, not data.</p></div>
+      <div class="pain-card reveal rd-2"><span class="pain-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3>Hours lost every set</h3><p>Building one player or character break list takes 2 to 3 hours. Every sport. Every TCG set. It adds up to hundreds of hours a year.</p></div>
+      <div class="pain-card reveal"><span class="pain-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/></svg></span><h3>Tools scattered everywhere</h3><p>ChatGPT for thumbnails. Google for pricing. Whatnot for stats. Sticky notes mid-stream. Nothing connected.</p></div>
+      <div class="pain-card reveal rd-1"><span class="pain-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><h3>Stuck at set prices for hours</h3><p>Refusing to budge to avoid losing a dollar while sitting 6 to 8 hours losing far more in time and momentum.</p></div>
+      <div class="pain-card reveal rd-2"><span class="pain-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 7l6 6 4-4 8 8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 17v-5h-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3>No data to grow from</h3><p>Which products are most profitable? Which buyers come back? Which breaks flopped and why? Nobody knows.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" aria-labelledby="how-title">
+  <div class="container">
+    <div class="center reveal" style="max-width:580px;margin:0 auto 60px">
+      <div class="s-label">The Breaker OS</div>
+      <h2 class="s-title" id="how-title">One system. The full break, start to finish.</h2>
+      <p class="s-sub">From the box on your shelf to the profit in your pocket, every step of your breaking business finally lives in one connected place.</p>
+    </div>
+    <div class="steps-row">
+      <div class="step reveal"><div class="step-num" aria-hidden="true">1</div><h3>Plan your break</h3><p>Add inventory, set your spots and margin, and see your break-even price and full profit forecast before you ever go live.</p><ul><li>Profit forecast per spot</li><li>Pricing-tier warnings</li><li>Auto-built show title, thumbnail &amp; notes</li></ul></div>
+      <div class="step reveal rd-1"><div class="step-num" aria-hidden="true">2</div><h3>Go live with confidence</h3><p>Launch straight to your OBS scoreboard. Watch spots sold, revenue, and live profit move in real time so you can steer the break.</p><ul><li>Live profit on screen</li><li>Provably-fair spinner</li><li>Smart number pad</li></ul></div>
+      <div class="step reveal rd-2"><div class="step-num" aria-hidden="true">3</div><h3>Review and grow</h3><p>Import your sales CSV and get your profit report, analytics, and buyer CRM updated automatically, so you know exactly what to do next.</p><ul><li>Auto profit report</li><li>Actionable analytics</li><li>Dormant-buyer winback</li></ul></div>
+    </div>
+    <div class="reveal rd-2" style="margin-top:24px">
+      <div class="frame"><div class="frame-inner">
+        <img src="shot-workflow.jpg" alt="Breaker Tools Pro My Breaks view showing the week of planned and scheduled breaks" loading="lazy" />
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="vid" aria-labelledby="vid-title">
+  <div class="container">
+    <div class="center reveal" style="max-width:520px;margin:0 auto 44px">
+      <div class="s-label">See it in action</div>
+      <h2 class="s-title" id="vid-title">A full break in under 90 seconds.</h2>
+      <p class="s-sub">Watch the whole workflow, from inventory to final profit report.</p>
+    </div>
+    <div class="vid-wrap reveal rd-1">
+      <div class="frame vid-frame" role="button" tabindex="0" aria-label="Play walkthrough video">
+        <div class="frame-inner">
+          <!-- SWAP: replace with <iframe src="YOUR_LOOM_EMBED_URL" allowfullscreen ...> -->
+          <div class="vid-ph">
+            <span class="vid-play" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 26 26" fill="white"><path d="M9 6l13 7-13 7V6z"/></svg></span>
+            <span>WALKTHROUGH VIDEO: drop your Loom embed here</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" aria-labelledby="feat-title">
+  <div class="container">
+    <div class="center reveal" style="max-width:600px;margin:0 auto 40px">
+      <div class="s-label">Everything in one place</div>
+      <h2 class="s-title" id="feat-title">The whole break, one connected workflow.</h2>
+      <p class="s-sub">Inventory flows into your break. Your break builds your show. Your show feeds your scoreboard. Your results train your data. Nothing separate. Nothing manual.</p>
+    </div>
+
+    <!-- Scoreboard -->
+    <div class="feat-row reveal">
+      <div class="feat-txt">
+        <span class="feat-tag"><svg viewBox="0 0 18 18" fill="none"><rect x="2" y="3" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M6 16h6M9 13v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg> Live Scoreboard &amp; Overlay</span>
+        <h2>Watch your profit climb live, right on your stream.</h2>
+        <p>A custom OBS scoreboard that shows live profit, revenue, and spots sold in real time, so you steer the break instead of guessing. A provably-fair spinner is built right in. Top custom scoreboards on Fiverr start at $1,300 and are visual only, with no live data, no profit, and no spinner.</p>
+        <ul class="feat-pts">
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Live profit, revenue &amp; spots-sold counter</li>
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Built-in provably-fair spinner, platform compliant</li>
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Smart number pad that learns from your history</li>
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> One file. Paste into OBS and you're live</li>
+        </ul>
+      </div>
+      <div class="feat-vis">
+        <div class="float-chip fc-1" style="left:auto;right:-18px;top:-18px" aria-hidden="true"><span class="fc-ico" style="background:var(--green-bg);color:var(--green-lt)"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2v14M5 5.5c0-1.4 1.8-2.5 4-2.5s4 1.1 4 2.5S11.2 8 9 8.5 5 9.6 5 11s1.8 2.5 4 2.5 4-1.1 4-2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span><span class="fc-val" style="color:var(--green-lt)" data-counter="1284" data-prefix="$">$0</span><span class="fc-lbl">Live profit</span></span></div>
+        <div class="frame"><div class="frame-inner"><img src="shot-scoreboard.jpg" alt="Breaker Tools Pro live OBS scoreboard overlay with the team board and spinner" loading="lazy" /></div></div>
+      </div>
+    </div>
+
+    <!-- Break Calculator -->
+    <div class="feat-row rev reveal">
+      <div class="feat-txt">
+        <span class="feat-tag"><svg viewBox="0 0 18 18" fill="none"><rect x="3" y="2" width="12" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M6 6h6M6 9h2M6 12h2M11 9v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg> Break Calculator</span>
+        <h2>Know your numbers before you stream.</h2>
+        <p>Set your spots, costs, and margin target, and get your break-even price and full profit map before a single card is cracked. Go live with a plan, not a prayer.</p>
+        <ul class="feat-pts">
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Conservative, standard &amp; aggressive pricing tiers</li>
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Live thin-margin &amp; underpricing warnings</li>
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Whatnot, TikTok &amp; eBay fee calculator built in</li>
+        </ul>
+      </div>
+      <div class="feat-vis"><div class="frame"><div class="frame-inner"><img src="shot-calculator.jpg" alt="Breaker Tools Pro Break Calculator with pricing tiers and platform fees" loading="lazy" /></div></div></div>
+    </div>
+
+    <!-- Show Setup -->
+    <div class="feat-row reveal">
+      <div class="feat-txt">
+        <span class="feat-tag"><svg viewBox="0 0 18 18" fill="none"><rect x="2" y="4" width="11" height="8" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M15 6h1.5M15 9h1.5M2 15h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg> Show Setup Generator</span>
+        <h2>Title, thumbnail &amp; show notes in 30 seconds.</h2>
+        <p>Stop opening ChatGPT, Canva, and a notes app before every show. Generate your Whatnot title, thumbnail, and notes straight from your break plan, all in one place. That's your $30/mo ChatGPT subscription replaced right there.</p>
+        <ul class="feat-pts">
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Auto-generated from your planned inventory</li>
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Correct sizes for Whatnot, YouTube &amp; social</li>
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Multiple styles: Hype, Clean, Fire, Premium</li>
+        </ul>
+      </div>
+      <div class="feat-vis"><div class="frame"><div class="frame-inner"><img src="shot-show-setup.jpg" alt="Breaker Tools Pro Show Setup generating a Whatnot title, thumbnail, and notes" loading="lazy" /></div></div></div>
+    </div>
+
+    <!-- AI Assistant -->
+    <div class="feat-row rev reveal">
+      <div class="feat-txt">
+        <span class="feat-tag"><svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.6"/><path d="M6 8.5c0-1.7 1.3-3 3-3s3 1.3 3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="9" cy="12" r="1.3" fill="currentColor"/></svg> AI Breaking Assistant</span>
+        <h2>A breaking expert trained on the top 1% of Whatnot shops.</h2>
+        <p>Not generic AI. It's trained on strategies analyzed from the top 1% of Whatnot breaking shops, plus your own break and sales data. Ask it for a pricing read, a loss diagnosis, or show notes. It knows your business and the game, on every page.</p>
+        <ul class="feat-pts">
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Reads your break history, sales &amp; inventory</li>
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Trained on top 1% Whatnot shop strategies</li>
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Pricing reads, show-note drafts, loss diagnostics</li>
+        </ul>
+      </div>
+      <div class="feat-vis"><div class="frame"><div class="frame-inner"><img src="shot-ai.jpg" alt="Breaker Tools Pro AI Breaking Assistant answering questions about your breaks" loading="lazy" /></div></div></div>
+    </div>
+
+    <!-- Break Lists -->
+    <div class="feat-row reveal">
+      <div class="feat-txt">
+        <span class="feat-tag"><svg viewBox="0 0 18 18" fill="none"><path d="M4 5h10M4 9h10M4 13h7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg> Break Lists + AI Generator</span>
+        <h2>Player &amp; character breaks, done in seconds.</h2>
+        <p>What used to take 2 to 3 hours per set is now instant. Every football release, every basketball set, every TCG drop, all generated and exported straight to Whatnot. That's hundreds of hours back in your year.</p>
+        <ul class="feat-pts">
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> AI-generated lists for any sport or TCG set</li>
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Searchable library of pre-built lists</li>
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Exports straight to clipboard for Whatnot</li>
+        </ul>
+      </div>
+      <div class="feat-vis"><div class="frame"><div class="frame-inner"><div class="shot-ph" aria-label="Break Lists screenshot placeholder"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M10 12h28M10 20h22M10 28h26M10 36h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>BREAK LISTS SCREENSHOT</span></div></div></div></div>
+    </div>
+
+    <!-- Analytics + CRM -->
+    <div class="feat-row rev reveal">
+      <div class="feat-txt">
+        <span class="feat-tag"><svg viewBox="0 0 18 18" fill="none"><path d="M3 15V3M3 15h12M6 12V8M10 12V5M14 12V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg> Analytics + Buyer CRM</span>
+        <h2>Know what to run, and who to bring back.</h2>
+        <p>Actionable insights Whatnot's own stats can't give you, plus a buyer CRM that flags your dormant repeat buyers before the next show. Save hours on reporting and grow from real data instead of gut feel.</p>
+        <ul class="feat-pts">
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Profit by break, product &amp; category</li>
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Recommended next break by ROI</li>
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Dormant-buyer winback with copy-ready tags</li>
+        </ul>
+      </div>
+      <div class="feat-vis"><div class="frame"><div class="frame-inner"><img src="shot-analytics.jpg" alt="Breaker Tools Pro Analytics showing profit by break, revenue goal, and buyer insights" loading="lazy" /></div></div></div>
+    </div>
+
+    <div class="center reveal" style="margin-top:56px">
+      <a href="https://app.breakertools.pro/login?signup=1&amp;next=billing" class="btn-primary btn-lg">Try the whole system free<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <p style="font-size:13px;color:var(--text-3);margin-top:14px">7-day free trial · No charge until day 8 · Cancel anytime</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section class="compare" aria-labelledby="cmp-title">
+  <div class="container">
+    <div class="center reveal" style="margin-bottom:56px"><div class="s-label">The old way vs. Breaker Tools Pro</div><h2 class="s-title" id="cmp-title">1,000× better than a spreadsheet.</h2></div>
+    <div class="cmp-table reveal">
+      <div class="cmp-before">
+        <div class="cmp-hd"><svg width="16" height="16" viewBox="0 0 15 15" fill="none" aria-hidden="true"><circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M5 5l5 5M10 5l-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg> The old way</div>
+        <div class="cmp-cell"><span class="ci">😓</span> ChatGPT for thumbnails, $30/mo extra</div>
+        <div class="cmp-cell"><span class="ci">😓</span> Manual spreadsheets and broken formulas</div>
+        <div class="cmp-cell"><span class="ci">😓</span> Sticky notes and mental math mid-stream</div>
+        <div class="cmp-cell"><span class="ci">😓</span> 2 to 3 hours building each player break list</div>
+        <div class="cmp-cell"><span class="ci">😓</span> Guessing profit after the show ends</div>
+        <div class="cmp-cell"><span class="ci">😓</span> No idea which products or buyers perform</div>
+      </div>
+      <div class="cmp-after">
+        <div class="cmp-hd"><svg width="16" height="16" viewBox="0 0 15 15" fill="none" aria-hidden="true"><circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M4 7.5l2.8 2.8 4-4.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg> With Breaker Tools Pro</div>
+        <div class="cmp-cell"><span class="ci">✅</span> Thumbnail auto-generated from your break</div>
+        <div class="cmp-cell"><span class="ci">✅</span> Live profit visible before you go live</div>
+        <div class="cmp-cell"><span class="ci">✅</span> Real-time scoreboard, always accurate</div>
+        <div class="cmp-cell"><span class="ci">✅</span> AI builds break lists in seconds, every set</div>
+        <div class="cmp-cell"><span class="ci">✅</span> Full profit report auto-generated on import</div>
+        <div class="cmp-cell"><span class="ci">✅</span> Analytics and buyer CRM, all in one place</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPEED -->
+<section class="speed" aria-labelledby="speed-title">
+  <div class="container"><div class="speed-inner">
+    <div class="reveal">
+      <div class="s-label">No learning curve</div>
+      <h2 class="s-title" id="speed-title">You're live in 5 minutes.</h2>
+      <p class="s-sub" style="margin-bottom:30px">This isn't software you wrestle with for weeks. Add a box, plan your break, paste the scoreboard into OBS, and your first "oh, this changes everything" moment hits almost immediately.</p>
+      <ul class="speed-steps">
+        <li><span class="ss-n">1</span> Add a box to inventory</li>
+        <li><span class="ss-n">2</span> Plan &amp; price your break, see profit instantly</li>
+        <li><span class="ss-n">3</span> Generate your title, thumbnail &amp; notes</li>
+        <li><span class="ss-n">4</span> Paste the scoreboard into OBS and go live</li>
+      </ul>
+    </div>
+    <div class="reveal rd-1">
+      <div class="speed-clock">
+        <div class="clock-ring" aria-hidden="true"></div>
+        <div class="clock-fill" id="clockFill" aria-hidden="true"></div>
+        <div class="clock-num"><b id="clockNum">5</b><span>minutes to live</span></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- AVATARS -->
+<section aria-labelledby="who-title">
+  <div class="container">
+    <div class="center reveal" style="max-width:640px;margin:0 auto 52px">
+      <div class="s-label">Who this is for</div>
+      <h2 class="s-title" id="who-title">From your first break to your full-time income.</h2>
+      <p class="s-sub">One system that scales with you, and puts you ahead of everyone still running their shows on guesswork.</p>
+    </div>
+    <div class="avatar-grid">
+      <div class="av-card reveal">
+        <span class="av-tag">New breakers</span>
+        <h3>Start smart. Don't lose money learning the hard way.</h3>
+        <p>You want a roadmap, not a gamble. Breaker Tools Pro shows your profit before you go live, keeps you organized, and builds the habits of a top-1% breaker into your very first show.</p>
+        <ul class="av-pts">
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> See your break-even price before you ever stream</li>
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Plan efficiently: title, thumbnail &amp; notes in minutes</li>
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Run like a top-1% breaker from day one</li>
+        </ul>
+      </div>
+      <div class="av-card reveal rd-1">
+        <span class="av-tag">Experienced &amp; full-time breakers</span>
+        <h3>Maximize profitability. Steer every break to your number.</h3>
+        <p>You're already doing the work. Now run it like a real business. See exactly where each break stands, steer it toward your profit goal in real time, and let the analytics tell you what to scale.</p>
+        <ul class="av-pts">
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Steer live profit toward your target, every show</li>
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Full analytics + buyer CRM to scale what works</li>
+          <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Save hundreds of hours a year across the tools</li>
+        </ul>
+      </div>
+    </div>
+    <div class="center reveal rd-2" style="margin-top:44px"><a href="https://app.breakertools.pro/login?signup=1&amp;next=billing" class="btn-primary btn-lg">Start your free trial<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+  </div>
+</section>
+
+<!-- TIME STACK -->
+<section aria-labelledby="time-title">
+  <div class="container">
+    <div class="center reveal" style="max-width:540px;margin:0 auto 48px">
+      <div class="s-label">Get your time back</div>
+      <h2 class="s-title" id="time-title">Now add up the hours.</h2>
+      <p class="s-sub">It's not just money. Here's what the old way quietly costs you in time every single month.</p>
+    </div>
+    <div class="slap" style="max-width:680px">
+      <div class="val-stack reveal">
+        <div class="vs-top"><h3>Time the old way demands</h3><span>Hours / month</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Break lists, built by hand</span><span class="vp">13 hrs</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Buyer follow-up &amp; outreach</span><span class="vp">9 hrs</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Show setup (title, thumbnail, notes)</span><span class="vp">6 hrs</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Post-break profit reconciliation</span><span class="vp">6 hrs</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Inventory &amp; expense tracking</span><span class="vp">5 hrs</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Break planning &amp; pricing</span><span class="vp">4 hrs</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Sort &amp; pack</span><span class="vp">4 hrs</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Knowing what to run next</span><span class="vp" style="color:var(--blue-lt)">priceless</span></div>
+        <div class="vs-total"><span>Hours back in your month</span><span class="tv"><span data-counter="45">0</span>+ hrs</span></div>
+      </div>
+      <p class="slap-line reveal rd-1">That's <b>more than a full work-week</b> back every month.<br>Hours you can put into more breaks, more buyers, and more profit.</p>
+      <p style="font-size:13px;color:var(--text-3);margin-top:18px">Based on the average breaker running about 3 shows a week. Run more, save more.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing" aria-labelledby="pricing-title">
+  <div class="container">
+    <div class="center reveal" style="max-width:480px;margin:0 auto 52px"><div class="s-label">Pricing</div><h2 class="s-title" id="pricing-title">Add it all up.</h2><p class="s-sub">Here's what every piece would cost you separately.</p></div>
+    <div class="slap">
+      <div class="val-stack reveal">
+        <div class="vs-top"><h3>Breaker Tools Pro: everything included</h3><span>Standalone value</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Break Calculator</span><span class="vp">$228/yr</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Live Scoreboard, Overlay &amp; Spinner</span><span class="vp">$1,497</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Inventory &amp; Expense Tracker</span><span class="vp">$588/yr</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Break Lists + AI Generator</span><span class="vp">$468/yr</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Analytics Dashboard</span><span class="vp">$588/yr</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Show Setup Generator</span><span class="vp">$468/yr</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>AI Breaking Assistant</span><span class="vp">$588/yr</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Buyer CRM + Winback Panel</span><span class="vp">$468/yr</span></div>
+        <div class="vrow bonus"><span class="vn"><span class="dot"></span>Bonus: How to Win on Whatnot playbook</span><span class="vp">$197 free</span></div>
+        <div class="vrow bonus"><span class="vn"><span class="dot"></span>Bonus: Private breaker community + feature votes</span><span class="vp">$147 free</span></div>
+        <div class="vrow bonus"><span class="vn"><span class="dot"></span>Bonus: 5-minute fast-start walkthrough</span><span class="vp">$47 free</span></div>
+        <div class="vs-total"><span>Total value</span><span class="tv">$5,276</span></div>
+      </div>
+      <p class="slap-line reveal rd-1">You don't pay <s>$5,276</s>. You don't even pay <s>$39/mo</s>.<br><b>As a founder, you pay just</b></p>
+      <div class="slap-price reveal rd-1">$29<small>/mo</small></div>
+    </div>
+    <div class="slot-wrap reveal" role="status"><div class="slot-row"><span>Founder spots remaining</span><span class="slot-count">7 of 25 left</span></div><div class="slot-bar"><div class="slot-fill"></div></div></div>
+    <p class="center reveal" style="max-width:560px;margin:-22px auto 40px;font-size:14px;color:var(--text-2);line-height:1.6">Why $29? We're letting the first 25 shops in at founder pricing to help shape the product. Once those 25 spots are gone, it's $39 for good.</p>
+    <div class="free-onramp reveal" style="max-width:920px;margin:0 auto 22px;padding:22px 26px;border:1px solid var(--border-md);border-radius:var(--r-lg);background:linear-gradient(180deg,var(--card),rgba(14,27,48,.4));display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+      <div style="flex:1;min-width:240px">
+        <div style="font-family:'Sora',sans-serif;font-weight:800;font-size:17px;margin-bottom:4px">Just want to test the waters? Start free.</div>
+        <p style="font-size:14px;color:var(--text-2);margin:0;line-height:1.6">The Break Calculator is free, forever. See your spot price and profit before any show. Pro unlocks every tool that connects to it.</p>
+      </div>
+      <a href="https://app.breakertools.pro/calculator" class="btn-outline" style="font-size:14px;padding:12px 22px;white-space:nowrap">Try the Break Calculator free</a>
+    </div>
+    <div class="price-cards">
+      <div class="pcard reveal">
+        <div class="pc-lbl">Monthly</div><div class="pc-price"><span class="pc-amt">$39</span><span class="pc-per">/mo</span></div>
+        <div class="pc-note">Billed monthly · Full Pro access</div>
+        <a href="https://app.breakertools.pro/login?signup=1&amp;next=billing" class="pc-cta btn-outline">Start 7-day free trial</a>
+        <p class="pc-fine">No charge until day 8</p>
+      </div>
+      <div class="pcard feat reveal rd-1">
+        <div class="pc-badge">⚡ FOUNDER: ONLY 25 SPOTS</div>
+        <div class="pc-lbl">Founder</div><div class="pc-price"><span class="pc-amt">$29</span><span class="pc-per">/mo</span></div>
+        <div class="pc-note">Locked in forever while you stay subscribed</div>
+        <a href="https://app.breakertools.pro/login?signup=1&amp;next=billing" class="pc-cta btn-primary">Start free trial &amp; lock $29</a>
+        <p class="pc-fine">Goes to $39/mo once founder spots fill</p>
+      </div>
+      <div class="pcard reveal rd-2">
+        <div class="pc-lbl">Annual</div><div class="pc-price"><span class="pc-amt">$390</span><span class="pc-per">/yr</span></div>
+        <div class="pc-note">≈ 2 months free · Full Pro access</div>
+        <a href="https://app.breakertools.pro/login?signup=1&amp;next=billing" class="pc-cta btn-outline">Start 7-day free trial</a>
+        <p class="pc-fine">No charge until day 8</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section aria-labelledby="testi-title">
+  <div class="container">
+    <div class="center reveal" style="margin-bottom:52px"><div class="s-label">Real results</div><h2 class="s-title" id="testi-title">From breakers who stopped guessing.</h2></div>
+    <div class="testi-grid">
+      <div class="t-card featured reveal">
+        <div class="t-stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <p class="t-text">"We went from zero to $40,000 in sales in our first 100 days on Whatnot, starting with limited inventory and no following. These tools gave us the roadmap and the live profit tracking to actually know what we were doing. We're about to hit premier shop status and I genuinely don't know how we'd run our shows without it."</p>
+        <div class="t-author"><div class="t-av" aria-hidden="true">BB</div><div><div class="t-name">Bleacher Boys</div><div class="t-handle">Whatnot · Founding user</div></div></div>
+      </div>
+      <!-- SWAP: replace placeholders with real early-access quotes before launch -->
+      <div class="t-card reveal rd-1"><div class="t-stars" aria-label="5 out of 5 stars">★★★★★</div><p class="t-text">"[Early-access breaker testimonial. Replace before launch. Pull a real quote from one of your first free-week users here.]"</p><div class="t-author"><div class="t-av" aria-hidden="true" style="background:var(--card-hover)">?</div><div><div class="t-name">Early-access breaker</div><div class="t-handle">Whatnot</div></div></div></div>
+      <div class="t-card reveal rd-2"><div class="t-stars" aria-label="5 out of 5 stars">★★★★★</div><p class="t-text">"[Early-access breaker testimonial. Replace before launch. Pull a real quote from one of your first free-week users here.]"</p><div class="t-author"><div class="t-av" aria-hidden="true" style="background:var(--card-hover)">?</div><div><div class="t-name">Early-access breaker</div><div class="t-handle">Whatnot</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<section class="guar" aria-labelledby="guar-title">
+  <div class="container"><div class="guar-inner reveal">
+    <div class="seal" role="img" aria-label="30-day Zero Risk Guarantee seal">
+      <svg viewBox="0 0 150 150" fill="none" aria-hidden="true">
+        <path d="M75 8l52 18v40c0 33-22 58-52 68-30-10-52-35-52-68V26L75 8z" fill="rgba(16,185,129,.10)" stroke="var(--green-bd)" stroke-width="2"/>
+        <path d="M75 18l43 15v34c0 27-18 48-43 57-25-9-43-30-43-57V33L75 18z" stroke="rgba(16,185,129,.25)" stroke-width="1.5"/>
+        <path d="M56 76l13 13 26-28" stroke="var(--green-lt)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="75" y="118" text-anchor="middle" font-family="Sora,sans-serif" font-size="13" font-weight="800" fill="var(--green-lt)">30 DAYS</text>
+      </svg>
+    </div>
+    <div class="guar-txt">
+      <div class="s-label">The Zero Risk Guarantee</div>
+      <h2 id="guar-title">Try it for 30 days. Love it or your money back.</h2>
+      <p>We're so confident Breaker Tools Pro will change how you run your breaking business that we take on all the risk. If you're not happy, for any reason, message us within 30 days and we'll refund you in full within 24 hours. No questions. No hoops. You keep the How to Win on Whatnot playbook either way.</p>
+    </div>
+  </div></div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" aria-labelledby="faq-title">
+  <div class="container">
+    <div class="center reveal" style="margin-bottom:52px"><div class="s-label">FAQ</div><h2 class="s-title" id="faq-title">Every question answered.</h2></div>
+    <div class="faq-list reveal">
+      <div class="faq-item"><div class="faq-q" role="button" tabindex="0" aria-expanded="false">How is this different from a spreadsheet or Whatnot's built-in tools?<svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5 7l5 5 5-5"/></svg></div><div class="faq-a">Spreadsheets and Whatnot's stats tell you what happened after the fact. Breaker Tools Pro is one connected system that works alongside the platforms. It plans your break, shows your profit live while you stream, builds your lists and show setup, and turns your results into analytics. Everything talks to everything. Nothing is manual.</div></div>
+      <div class="faq-item"><div class="faq-q" role="button" tabindex="0" aria-expanded="false">Does it work for both sports cards and TCG like Pokémon?<svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5 7l5 5 5-5"/></svg></div><div class="faq-a">Yes. Breaker Tools Pro is built for both. Sports breaks, TCG breaks (Pokémon, One Piece, Lorcana and more), player breaks, character breaks, random and set pricing, and the calculator, lists, and scoreboard all adapt to how you run your shows.</div></div>
+      <div class="faq-item"><div class="faq-q" role="button" tabindex="0" aria-expanded="false">Does it work with Whatnot, TikTok, and eBay?<svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5 7l5 5 5-5"/></svg></div><div class="faq-a">Yes. It's a co-pilot for the platforms you already stream on. Fee calculators for all three, a scoreboard that drops into OBS for any platform, and a provably-fair spinner with a per-platform compliance panel that we keep current as the rules change.</div></div>
+      <div class="faq-item"><div class="faq-q" role="button" tabindex="0" aria-expanded="false">Is the $1 start actually safe with this tool?<svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5 7l5 5 5-5"/></svg></div><div class="faq-a">That's exactly what Breaker Tools Pro is built for. You see your break-even price before you go live, and your live profit updates on the scoreboard in real time so you can steer at every moment. The tools de-risk the $1 start so the room sets fair value, and you always know where you stand.</div></div>
+      <div class="faq-item"><div class="faq-q" role="button" tabindex="0" aria-expanded="false">Do I need technical skills to set up the scoreboard?<svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5 7l5 5 5-5"/></svg></div><div class="faq-a">If you can paste a URL into an OBS browser source, you're done. The scoreboard is a single file. Our onboarding walkthrough gets you live in under 5 minutes, and the community is there if you need help.</div></div>
+      <div class="faq-item"><div class="faq-q" role="button" tabindex="0" aria-expanded="false">What does the AI assistant actually know?<svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5 7l5 5 5-5"/></svg></div><div class="faq-a">Two things: your own break and sales data, and strategies analyzed from the top 1% of Whatnot breaking shops. Ask it for a pricing read, help diagnosing a losing break, a show-note draft, or anything about your business. It's live on every page.</div></div>
+      <div class="faq-item"><div class="faq-q" role="button" tabindex="0" aria-expanded="false">What's the difference between the free trial and founder pricing?<svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5 7l5 5 5-5"/></svg></div><div class="faq-a">Everyone starts with a 7-day free trial of full Pro, with no charge until day 8. If you grab a founder spot, you lock in $29/month for as long as you stay subscribed. Once the 25 founder spots are gone, the price is $39/month permanently.</div></div>
+      <div class="faq-item"><div class="faq-q" role="button" tabindex="0" aria-expanded="false">What if it doesn't work for me?<svg class="faq-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5 7l5 5 5-5"/></svg></div><div class="faq-a">Full 30-day money back, no questions asked, processed within 24 hours. You keep the How to Win on Whatnot playbook regardless. We take on all the risk. That's the Zero Risk Guarantee.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="final" aria-labelledby="final-title">
+  <div class="aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i></div>
+  <div class="container"><div class="final-inner reveal">
+    <h2 id="final-title">Profit on purpose.<br><span class="accent">Not by accident.</span></h2>
+    <p>Run your breaks with a plan, steer every one toward your number, and never fly blind again. Start your free trial and feel the difference on your very next show.</p>
+    <div class="final-btns">
+      <a href="https://app.breakertools.pro/login?signup=1&amp;next=billing" class="btn-primary btn-lg">Start your free trial<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="https://app.breakertools.pro/login?signup=1&amp;next=billing" class="btn-outline btn-lg">Claim a founder spot</a>
+    </div>
+    <div class="hero-note" style="justify-content:center"><span>7-day free trial</span><span>·</span><span>Zero Risk Guarantee</span><span>·</span><span>Cancel anytime</span></div>
+  </div></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container"><div class="foot-inner">
+    <a href="/" class="nav-logo" aria-label="Breaker Tools Pro home"><span class="nav-logo-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M11.5 2.5L4 11h7.5L9 17.5 18 8h-8L11.5 2.5z" fill="white"/></svg></span><span class="nav-wordmark">BREAKER<br><span>TOOLS PRO</span></span></a>
+    <ul class="foot-links"><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li><li><a href="mailto:support@breakertools.pro">Support</a></li></ul>
+    <p class="foot-copy">© 2026 Breaker Tools Pro. Built for breakers, by breakers.</p>
+  </div></div>
+</footer>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), { passive:true });
+
+  const hero = document.querySelector('.hero'), sl = document.getElementById('spotlight');
+  if (matchMedia('(pointer:fine)').matches) {
+    hero.addEventListener('pointermove', e => { const r = hero.getBoundingClientRect(); sl.style.left=(e.clientX-r.left)+'px'; sl.style.top=(e.clientY-r.top)+'px'; sl.style.opacity=1; });
+    hero.addEventListener('pointerleave', () => sl.style.opacity=0);
+  }
+
+  const ro = new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); ro.unobserve(e.target); }}),{threshold:.12,rootMargin:'0px 0px -50px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+  function count(el){ const target=parseFloat(el.dataset.counter), pre=el.dataset.prefix||'', suf=el.dataset.suffix||'', dur=1900, t0=performance.now();
+    (function tick(now){ const p=Math.min((now-t0)/dur,1); const v=Math.floor((1-Math.pow(1-p,3))*target); el.textContent=pre+v.toLocaleString()+suf; if(p<1) requestAnimationFrame(tick); })(performance.now()); }
+  const co = new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ count(e.target); co.unobserve(e.target); }}),{threshold:.5});
+  document.querySelectorAll('[data-counter]').forEach(el=>co.observe(el));
+
+  const clockFill=document.getElementById('clockFill'), clockNum=document.getElementById('clockNum');
+  const cko = new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){
+    let deg=0; const id=setInterval(()=>{ deg+=5; clockFill.style.background=`conic-gradient(var(--blue) 0deg ${deg}deg, transparent ${deg}deg)`; clockNum.textContent=Math.max(1,Math.round(deg/72)); if(deg>=360){ clockNum.textContent='5'; clearInterval(id);} },12); cko.unobserve(e.target);
+  }}),{threshold:.5});
+  if(clockFill) cko.observe(clockFill);
+
+  function toggleFaq(item){ const open=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i=>{ i.classList.remove('open'); i.querySelector('.faq-q').setAttribute('aria-expanded','false'); });
+    if(!open){ item.classList.add('open'); item.querySelector('.faq-q').setAttribute('aria-expanded','true'); } }
+  document.querySelectorAll('.faq-q').forEach(q=>{ q.addEventListener('click',()=>toggleFaq(q.parentElement)); q.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggleFaq(q.parentElement);} }); });
+</script>
+</body>
+</html>

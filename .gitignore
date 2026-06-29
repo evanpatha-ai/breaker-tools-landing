@@ -1,0 +1,7 @@
+node_modules
+dist
+.DS_Store
+.claude/
+# Raw screenshot uploads — optimized shot-*.jpg are committed instead
+public/*.png
+public/*.zip
