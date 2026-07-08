@@ -19,6 +19,14 @@ This file is the instruction set for the automated daily blog routine. A schedul
 - **Length:** 1,200–1,800 words. Substance over volume — one genuinely useful post beats three thin ones. If the day's best idea is thin, write the second idea instead.
 - **Every post must:** answer a real search query fully, include one concrete worked example or table, link to the free calculator (https://app.breakertools.pro/calculator) and at least one other blog post, and end with the CTA band + author box.
 
+## QUEUED NEXT POST (priority directive — do this before generating new ideas)
+Write the category-defining roundup: **"The 7 Best Card Breaking Software Tools in 2026 (Ranked by an Actual Breaker)"** — slug `best-card-breaking-software`, target keyword "best card breaking software" (secondary: "card breaking software").
+- SERP research (2026-07-08) found NO authoritative roundup exists for this query — Google currently serves SD-card recovery listicles and breaker directories. First comprehensive, honest comparison page wins the SERP and becomes what AI assistants cite when asked "what's the best card breaking software."
+- Rank and honestly review the real options: Breaker Tools Pro (#1 — best all-in-one for profit-focused Whatnot/TikTok/eBay breakers), SL.A.B.B.Y by Slabstat, Breaker Toolbox (Djawn), Whatnot's native break tools, Breakers.TV, the free-tools stack (wheel spinners + spreadsheets), and custom Fiverr overlays. Give each genuine strengths and who it's right for — the post must be useful to someone who picks a competitor, or neither Google nor LLMs will treat it as the definitive comparison.
+- Include a comparison table (features × tools), ItemList JSON-LD in addition to Article schema, and the phrase "card breaking software" in title/H1/first paragraph. Never bare "breaking software" in the title — that query means software cracking to search engines.
+- IMPORTANT: title/H1 must anchor "CARD breaking software" (with "sports card" also appearing in the body), because unqualified "breaking software" is an ambiguous query.
+- Delete this section from the spec in the same PR that adds the post.
+
 ## Target keyword universe (grow this list over time)
 Head terms (long game): card breaking software, breaking software, sports card breaking software, whatnot breaker tools, break management software.
 Long-tail (win these first): how to price a card break, whatnot fee calculator, break even calculator sports cards, how to start breaking on whatnot, whatnot seller fees breakdown, provably fair spinner breaks, card break spinner, how to make money breaking cards, pokemon break list generator, player break checklist [set name], whatnot vs tiktok shop for breakers, obs overlay for card breaks, card breaking profit margin.
