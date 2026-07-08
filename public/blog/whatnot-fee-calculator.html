@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Whatnot Fee Calculator: How to Know Your Real Break Margin | Breaker Tools Pro</title>
+  <meta name="description" content="Whatnot takes a cut before you ever see the money. Here's exactly how to build a whatnot fee calculator into your pricing so every break is profitable before you go live." />
+  <link rel="canonical" href="https://breakertools.pro/blog/whatnot-fee-calculator.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Whatnot Fee Calculator: How to Know Your Real Break Margin" />
+  <meta property="og:description" content="Whatnot takes a cut before you ever see the money. Here's how to calculate it so every break is priced to actually make money." />
+  <meta property="og:url" content="https://breakertools.pro/blog/whatnot-fee-calculator.html" />
+  <meta property="og:image" content="https://breakertools.pro/shot-dashboard.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#060B17" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/blog/blog.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Whatnot Fee Calculator: How to Know Your Real Break Margin",
+    "description": "Whatnot takes a cut before you ever see the money. Here's exactly how to build a whatnot fee calculator into your pricing so every break is profitable before you go live.",
+    "author": { "@type": "Person", "name": "Evan", "url": "https://breakertools.pro/" },
+    "publisher": { "@type": "Organization", "name": "Breaker Tools Pro", "url": "https://breakertools.pro/" },
+    "datePublished": "2026-07-08",
+    "dateModified": "2026-07-08",
+    "mainEntityOfPage": "https://breakertools.pro/blog/whatnot-fee-calculator.html",
+    "image": "https://breakertools.pro/shot-dashboard.jpg"
+  }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<nav class="b-nav">
+  <div class="b-nav-inner">
+    <a href="/" class="b-logo" aria-label="Breaker Tools Pro home">
+      <span class="b-logo-icon"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M11.5 2.5L4 11h7.5L9 17.5 18 8h-8L11.5 2.5z" fill="white"/></svg></span>
+      <span class="b-wordmark">BREAKER<br><span>TOOLS PRO</span></span>
+    </a>
+    <div class="b-nav-right">
+      <a href="/blog/" class="b-nav-link">Blog</a>
+      <a href="/#pricing" class="b-nav-link hide-m">Pricing</a>
+      <a href="https://app.breakertools.pro/calculator" class="b-cta">Try the free calculator</a>
+    </div>
+  </div>
+</nav>
+
+<article class="b-article container">
+  <p class="b-crumbs"><a href="/blog/">Blog</a> / Whatnot Fee Calculator</p>
+  <h1>Whatnot Fee Calculator: How to Know Your Real Break Margin</h1>
+  <div class="b-meta">
+    <span><b>Evan</b>, The Bleacher Boys</span>
+    <span>·</span>
+    <span>July 8, 2026</span>
+    <span>·</span>
+    <span>8 min read</span>
+  </div>
+
+  <p>Every breaker figures this out the same way: the hard way. You price a box, you sell every spot, the show crushes, and then the payout hits your bank account a few days later and it's noticeably lighter than you expected. That gap is Whatnot's cut — and if you're not building it into your pricing before you go live, you're not actually pricing your breaks. You're guessing and hoping the math works out.</p>
+
+  <p>We run our breaks on a spreadsheet-turned-tool that does this math automatically now, but for years we did it by hand before every single show. This post is that math, laid out so you can run it yourself — or just use the free calculator at the bottom and stop doing it by hand.</p>
+
+  <h2>What actually comes out of a Whatnot payout</h2>
+
+  <p>There are two separate deductions between "spot sold for $20" and "money in your account," and breakers routinely conflate them:</p>
+
+  <ul>
+    <li><strong>Whatnot's platform/commission fee</strong> — the cut Whatnot takes for hosting your show, running the marketplace, and handling buyer protection.</li>
+    <li><strong>Payment processing fees</strong> — the card-network and processor cost of actually moving the money, which every marketplace passes through in some form.</li>
+  </ul>
+
+  <p>Whatnot's published fee structure has moved around over the platform's history, and it can differ by category or promotion, so treat any specific percentage — including the ones later in this post — as <strong>typical, as of this writing</strong>, and confirm the current number in your own Whatnot seller dashboard before you build it into your pricing. The point of this post isn't to hand you a number to memorize; it's to get you into the habit of checking your actual take rate every few months and re-running your pricing against it, because a fee change that goes unnoticed quietly eats your margin on every single show after it.</p>
+
+  <div class="b-callout">
+    <p class="b-callout-title">Why this matters more than people think</p>
+    <p>A break-even calculation that ignores platform fees isn't slightly off — it's systematically wrong in the same direction, every time. If you're running 40+ boxes a month, a fee you forgot to account for isn't a rounding error, it's a monthly number with three figures on it.</p>
+  </div>
+
+  <h2>The formula</h2>
+
+  <p>At its simplest, your net payout on any single sale is:</p>
+
+  <div class="b-formula">Net Payout = Sale Price − (Sale Price × Platform Fee %) − Payment Processing Fee</div>
+
+  <p>And your break-even price — the price you need to charge per spot to cover your box cost, with Whatnot's cut already backed out — is the reverse of that:</p>
+
+  <div class="b-formula">Break-Even Price = (Cost Per Spot) ÷ (1 − Platform Fee % − Processing Fee %)</div>
+
+  <p>That division at the end is the part breakers skip. Subtracting the fee percentage from your price feels intuitive but understates what you need to charge, because the fee also applies to the extra amount you add to cover the fee. Dividing instead of subtracting is what actually gets you back to break-even.</p>
+
+  <h2>A worked example</h2>
+
+  <p>Say you're breaking a 20-spot random box that cost you $340 total, so your cost per spot is $17. You want to know what to charge per spot to cover cost — before you add any margin on top. Using a typical combined Whatnot take (platform commission plus processing) in the 10-13% range as of this writing:</p>
+
+  <table>
+    <tr><th>Item</th><th>Amount</th></tr>
+    <tr><td>Box cost</td><td>$340.00</td></tr>
+    <tr><td>Spots</td><td>20</td></tr>
+    <tr><td>Cost per spot</td><td>$17.00</td></tr>
+    <tr><td>Estimated combined platform + processing fee</td><td>~12%</td></tr>
+    <tr><td>Break-even price per spot</td><td>$17.00 ÷ (1 − 0.12) = <strong>$19.32</strong></td></tr>
+  </table>
+
+  <p>Notice that's not $17 plus 12%, which would be $19.04. The gap between $19.04 and $19.32 looks tiny on one spot. Multiply it across 20 spots and every show you run this month, and it stops being tiny — it's the difference between a break that pays for itself and one that quietly loses money while looking like it sold out clean.</p>
+
+  <p>From there, everything above $19.32 per spot is your actual margin. If you sell those 20 spots at $25, your margin per spot is $25 − $19.32 = $5.68, or about $113.60 on the box — not the $160 you'd get from naively doing "$25 minus $17 cost" without ever touching fees.</p>
+
+  <h2>Where breakers get this wrong</h2>
+
+  <h3>Pricing off the sticker, not the payout</h3>
+  <p>The most common mistake is pricing purely against box cost and ignoring fees entirely — treating the platform cut as something that comes out of "profit" later rather than something baked into the price itself. It's the same box cost, but the fee doesn't care whether you've mentally set it aside; it comes off the top of every sale regardless.</p>
+
+  <h3>Subtracting instead of dividing</h3>
+  <p>Covered above, but worth repeating because it's the single most common math error in break pricing: subtracting your fee percentage from cost undercounts what you need to charge. Divide by (1 − fee%), don't multiply and subtract.</p>
+
+  <h3>Forgetting fees compound with hits and giveaways</h3>
+  <p>If you're running a break with a random hit spot, a bonus giveaway spot, or comped spots for regulars, those spots still cost you box inventory but generate zero (or reduced) revenue to offset the fee on the rest of the box. Your break-even price on the paid spots needs to absorb both the fee <em>and</em> the cost of the spots that aren't generating full revenue.</p>
+
+  <h2>Building it into your workflow, not just your head</h2>
+
+  <p>Doing this math once for one box is fine. Doing it correctly, box after box, set after set, spot count after spot count, for every show you run — that's where it breaks down for most breakers, because nobody wants to open a calculator app mid-stream to sanity-check a price they're about to announce.</p>
+
+  <p>That's the actual reason we built the fee calculator into Breaker Tools Pro rather than just writing this formula down somewhere: pricing needs to happen at plan time, once, correctly, and then just be right for the rest of the show. The calculator takes your box cost, spot count, and platform (Whatnot, TikTok Shop, or eBay Live — they each have their own fee structure), and gives you the break-even price and margin at whatever price you're considering, before you ever go live. It's the same formula in this post, just running automatically instead of living in a notes app you have to remember to open.</p>
+
+  <div class="b-callout">
+    <p class="b-callout-title">Try it on your next box</p>
+    <p>Run your next box's numbers through the <a href="https://app.breakertools.pro/calculator">free break calculator</a> before you list it. Takes under a minute, and it'll tell you the break-even price and margin at whatever spot price you're considering — Whatnot, TikTok Shop, or eBay Live.</p>
+  </div>
+
+  <h2>The bigger picture: fees are a pricing input, not an afterthought</h2>
+
+  <p>None of this is complicated math. A fifth grader can divide by 0.88. The actual skill isn't the arithmetic, it's building the discipline to run it on every box before you price it, instead of finding out after the show whether you priced it right. That's true whether you're new and breaking single-box shows on the weekend, or running 30+ boxes a week as a full-time operation — the math doesn't get more sophisticated at scale, it just gets more expensive to skip.</p>
+
+  <p>If you want the deeper version of this — how to think about margin targets, not just break-even, and how to price around hit odds instead of just box cost — we cover that in <a href="/blog/">more posts on the blog</a> as we publish them. For now: know your fee, divide (don't subtract), and check your break-even before you go live, every time.</p>
+
+  <div class="b-cta-band">
+    <h2>Stop pricing breaks by feel</h2>
+    <p>Breaker Tools Pro's free calculator backs out Whatnot, TikTok Shop, and eBay Live fees automatically so you know your break-even before you list a single spot.</p>
+    <a href="https://app.breakertools.pro/calculator" class="b-cta">Try the free calculator</a>
+    <p class="b-fine">No account required to try it. Full platform includes live OBS profit tracking, break planning, and buyer CRM.</p>
+  </div>
+
+  <div class="b-author">
+    <div class="b-author-av">EB</div>
+    <div>
+      <div class="b-author-name">Evan — The Bleacher Boys</div>
+      <div class="b-author-bio">Evan runs breaks with The Bleacher Boys and builds Breaker Tools Pro, the operating system for card breakers who are tired of pricing off vibes and a calculator app.</div>
+    </div>
+  </div>
+</article>
+
+<footer class="b-footer">
+  <div class="b-footer-inner">
+    <span>© 2026 Breaker Tools Pro</span>
+    <span><a href="/">Home</a><a href="/blog/">Blog</a><a href="https://app.breakertools.pro/privacy">Privacy</a><a href="https://app.breakertools.pro/terms">Terms</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

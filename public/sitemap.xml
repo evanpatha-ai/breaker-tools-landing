@@ -11,5 +11,11 @@
     <priority>0.8</priority>
   </url>
   <!-- POSTS:START — the daily routine appends one <url> per published post -->
+  <url>
+    <loc>https://breakertools.pro/blog/whatnot-fee-calculator.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
   <!-- POSTS:END -->
 </urlset>

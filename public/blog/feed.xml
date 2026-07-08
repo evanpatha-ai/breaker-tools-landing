@@ -7,6 +7,13 @@
   <language>en-us</language>
   <atom:link href="https://breakertools.pro/blog/feed.xml" rel="self" type="application/rss+xml" />
   <!-- ITEMS:START — newest first. The daily routine inserts new items at the top. -->
+  <item>
+    <title>Whatnot Fee Calculator: How to Know Your Real Break Margin</title>
+    <link>https://breakertools.pro/blog/whatnot-fee-calculator.html</link>
+    <guid>https://breakertools.pro/blog/whatnot-fee-calculator.html</guid>
+    <description>Whatnot takes a cut before you ever see the money. Here's the exact formula to back it out of your pricing so every break is profitable before you go live.</description>
+    <pubDate>Wed, 08 Jul 2026 00:00:00 GMT</pubDate>
+  </item>
   <!-- ITEMS:END -->
 </channel>
 </rss>

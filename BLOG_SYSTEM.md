@@ -48,4 +48,4 @@ Merge = publish. Close = skip today.
 ## Published log
 | Date | Post | Target keyword |
 |------|------|----------------|
-| _(none yet — all posts require an approved PR)_ | | |
+| 2026-07-08 | Whatnot Fee Calculator: How to Know Your Real Break Margin | whatnot fee calculator |
