@@ -25,7 +25,9 @@ Long-tail (win these first): how to price a card break, whatnot fee calculator, 
 One keyword = one post. Track which posts target which keyword in this file's log below.
 
 ## Technical steps for each post
-1. **Create** `public/blog/<slug>.html`. Copy the exact structure of `public/blog/how-to-price-a-card-break.html` (head meta, Article JSON-LD, nav, breadcrumbs, meta row, CTA band, author box, footer). Slug: lowercase, hyphens, keyword-bearing, no dates.
+1. **Create** `public/blog/<slug>.html`. If another post already exists in `public/blog/`, copy its exact structure (head meta, Article JSON-LD, nav, breadcrumbs, meta row, CTA band, author box, footer) — it's the current source of truth for the pattern. If the blog is empty (no posts to copy from), use the structure below directly. Slug: lowercase, hyphens, keyword-bearing, no dates.
+
+   **Clean URLs, always:** the site serves `cleanUrls: true` (see `public/vercel.json`), so every reference to a post is extensionless — `https://breakertools.pro/blog/<slug>` never `<slug>.html`. This applies to: `<link rel="canonical">`, `og:url`, the Article JSON-LD `mainEntityOfPage`, the blog index card `href`, the RSS `<link>`/`<guid>`, and the sitemap `<loc>`. The physical file on disk is still `<slug>.html` — only the *file* has the extension, never a URL pointing at it.
 2. **Update** `public/blog/index.html`: insert a new `<a class="b-card">` at the TOP of the `POSTS:START` block.
 3. **Update** `public/blog/feed.xml`: insert a new `<item>` at the TOP of the `ITEMS:START` block.
 4. **Update** `public/sitemap.xml`: add a `<url>` inside the `POSTS:START` block with today's `lastmod`.
