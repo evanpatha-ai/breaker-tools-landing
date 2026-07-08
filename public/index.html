@@ -7,9 +7,52 @@
   <meta name="description" content="The operating system for serious card breakers. Know your profit before, during, and after every break. No spreadsheets. No guesswork." />
   <meta property="og:title" content="Breaker Tools Pro · Stop Breaking Blind" />
   <meta property="og:description" content="The all-in-one operating system for card breakers. Plan, run, and review every break in one place." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://breakertools.pro/" />
+  <meta property="og:image" content="https://breakertools.pro/shot-dashboard.jpg" />
+  <meta property="og:image:width" content="1752" />
+  <meta property="og:image:height" content="898" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Breaker Tools Pro · Stop Breaking Blind" />
+  <meta name="twitter:description" content="Know your profit before, during, and after every break. No spreadsheets. No guesswork." />
+  <meta name="twitter:image" content="https://breakertools.pro/shot-dashboard.jpg" />
+  <link rel="canonical" href="https://breakertools.pro/" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#060B17" />
+  <link rel="preload" as="image" href="/shot-dashboard.jpg" fetchpriority="high" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Breaker Tools Pro",
+    "url": "https://breakertools.pro/",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "description": "The operating system for card breakers. Plan breaks, track live profit on stream, generate break lists and show setups, and grow with analytics and a buyer CRM.",
+    "offers": [
+      { "@type": "Offer", "name": "Monthly", "price": "39", "priceCurrency": "USD" },
+      { "@type": "Offer", "name": "Founder", "price": "29", "priceCurrency": "USD" },
+      { "@type": "Offer", "name": "Annual", "price": "390", "priceCurrency": "USD" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "How is Breaker Tools Pro different from a spreadsheet or Whatnot's built-in tools?", "acceptedAnswer": { "@type": "Answer", "text": "Spreadsheets and platform stats tell you what happened after the fact. Breaker Tools Pro is one connected system: it plans your break, shows your profit live while you stream, builds your lists and show setup, and turns results into analytics." } },
+      { "@type": "Question", "name": "Does it work for both sports cards and TCG like Pokémon?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Sports breaks, TCG breaks (Pokémon, One Piece, Lorcana and more), player breaks, character breaks, random and set pricing all supported." } },
+      { "@type": "Question", "name": "Does it work with Whatnot, TikTok, and eBay?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Fee calculators for all three platforms, an OBS scoreboard for any stream, and a provably-fair spinner with per-platform compliance." } },
+      { "@type": "Question", "name": "Do I need technical skills to set up the scoreboard?", "acceptedAnswer": { "@type": "Answer", "text": "If you can paste a URL into an OBS browser source, you're done. Onboarding gets you live in under 5 minutes." } },
+      { "@type": "Question", "name": "What if it doesn't work for me?", "acceptedAnswer": { "@type": "Answer", "text": "Full 30-day money back guarantee, no questions asked, processed within 24 hours." } }
+    ]
+  }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -92,7 +135,7 @@
     .hero-visual { margin-top:66px; position:relative; z-index:2; animation:fadeUp 1.1s cubic-bezier(.16,1,.3,1) .5s both; }
     .frame { position:relative; border-radius:var(--r-xl); padding:1px; background:linear-gradient(160deg,rgba(96,165,250,.55),rgba(96,165,250,.04) 40%,transparent 70%); box-shadow:0 50px 130px rgba(0,0,0,.7); }
     .frame-inner { border-radius:calc(var(--r-xl) - 1px); overflow:hidden; background:var(--surface); }
-    .frame-inner img { width:100%; display:block; }
+    .frame-inner img { width:100%; height:auto; display:block; }
     .shot-ph { aspect-ratio:16/9; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; color:var(--text-3); font-size:13.5px; text-align:center; padding:20px; background:radial-gradient(ellipse at 50% 0%,rgba(59,130,246,.08),transparent 70%),var(--surface); }
     .shot-ph svg { opacity:.3; }
     .float-chip { position:absolute; background:rgba(14,27,48,.88); backdrop-filter:blur(12px); border:1px solid var(--border-md); border-radius:14px; padding:13px 17px; display:flex; align-items:center; gap:11px; box-shadow:0 16px 40px rgba(0,0,0,.5); z-index:3; }
@@ -313,10 +356,10 @@
     <div class="hero-badge">
       <span class="badge-dot" aria-hidden="true"></span>
       The operating system for card breakers
-      <span class="badge-pill">25 founder spots open</span>
+      <span class="badge-pill">7 of 25 founder spots left</span>
     </div>
     <h1 class="hero-h1">Stop Breaking<br><span class="accent">Blind.</span></h1>
-    <p class="hero-sub">Know exactly where your profit stands before, during, and after every break, for the first time. No spreadsheets. No sticky notes. No guesswork.</p>
+    <p class="hero-sub">Know exactly where your profit stands before, during, and after every break. No spreadsheets. No sticky notes. No guesswork.</p>
     <div class="hero-ctas">
       <a href="https://app.breakertools.pro/login?signup=1&amp;next=billing" class="btn-primary btn-lg">Start your free trial<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a href="https://app.breakertools.pro/calculator" class="btn-outline btn-lg">Try the Break Calculator free</a>
@@ -331,7 +374,7 @@
       <div class="float-chip fc-2" aria-hidden="true"><span class="fc-ico" style="background:rgba(59,130,246,.14);color:var(--blue-lt)"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.6"/><path d="M9 5v4l3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><span class="fc-val">10 hrs</span><span class="fc-lbl">Saved this set</span></span></div>
       <div class="frame">
         <div class="frame-inner">
-          <img src="shot-dashboard.jpg" alt="Breaker Tools Pro dashboard showing planned breaks, profit, and inventory on hand" loading="eager" />
+          <img src="shot-dashboard.jpg" alt="Breaker Tools Pro dashboard showing planned breaks, profit, and inventory on hand" loading="eager" width="1752" height="898" fetchpriority="high" />
         </div>
       </div>
     </div>
@@ -382,7 +425,7 @@
     </div>
     <div class="reveal rd-2" style="margin-top:24px">
       <div class="frame"><div class="frame-inner">
-        <img src="shot-workflow.jpg" alt="Breaker Tools Pro My Breaks view showing the week of planned and scheduled breaks" loading="lazy" />
+        <img src="shot-workflow.jpg" alt="Breaker Tools Pro My Breaks view showing the week of planned and scheduled breaks" loading="lazy" width="1752" height="898" decoding="async" />
       </div></div>
     </div>
   </div>
@@ -434,7 +477,7 @@
       </div>
       <div class="feat-vis">
         <div class="float-chip fc-1" style="left:auto;right:-18px;top:-18px" aria-hidden="true"><span class="fc-ico" style="background:var(--green-bg);color:var(--green-lt)"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2v14M5 5.5c0-1.4 1.8-2.5 4-2.5s4 1.1 4 2.5S11.2 8 9 8.5 5 9.6 5 11s1.8 2.5 4 2.5 4-1.1 4-2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span><span class="fc-val" style="color:var(--green-lt)" data-counter="1284" data-prefix="$">$0</span><span class="fc-lbl">Live profit</span></span></div>
-        <div class="frame"><div class="frame-inner"><img src="shot-scoreboard.jpg" alt="Breaker Tools Pro live OBS scoreboard overlay with the team board and spinner" loading="lazy" /></div></div>
+        <div class="frame"><div class="frame-inner"><img src="shot-scoreboard.jpg" alt="Breaker Tools Pro live OBS scoreboard overlay with the team board and spinner" loading="lazy" width="1920" height="984" decoding="async" /></div></div>
       </div>
     </div>
 
@@ -450,7 +493,7 @@
           <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Whatnot, TikTok &amp; eBay fee calculator built in</li>
         </ul>
       </div>
-      <div class="feat-vis"><div class="frame"><div class="frame-inner"><img src="shot-calculator.jpg" alt="Breaker Tools Pro Break Calculator with pricing tiers and platform fees" loading="lazy" /></div></div></div>
+      <div class="feat-vis"><div class="frame"><div class="frame-inner"><img src="shot-calculator.jpg" alt="Breaker Tools Pro Break Calculator with pricing tiers and platform fees" loading="lazy" width="1920" height="984" decoding="async" /></div></div></div>
     </div>
 
     <!-- Show Setup -->
@@ -465,7 +508,7 @@
           <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Multiple styles: Hype, Clean, Fire, Premium</li>
         </ul>
       </div>
-      <div class="feat-vis"><div class="frame"><div class="frame-inner"><img src="shot-show-setup.jpg" alt="Breaker Tools Pro Show Setup generating a Whatnot title, thumbnail, and notes" loading="lazy" /></div></div></div>
+      <div class="feat-vis"><div class="frame"><div class="frame-inner"><img src="shot-show-setup.jpg" alt="Breaker Tools Pro Show Setup generating a Whatnot title, thumbnail, and notes" loading="lazy" width="1920" height="984" decoding="async" /></div></div></div>
     </div>
 
     <!-- AI Assistant -->
@@ -480,7 +523,7 @@
           <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Pricing reads, show-note drafts, loss diagnostics</li>
         </ul>
       </div>
-      <div class="feat-vis"><div class="frame"><div class="frame-inner"><img src="shot-ai.jpg" alt="Breaker Tools Pro AI Breaking Assistant answering questions about your breaks" loading="lazy" /></div></div></div>
+      <div class="feat-vis"><div class="frame"><div class="frame-inner"><img src="shot-ai.jpg" alt="Breaker Tools Pro AI Breaking Assistant answering questions about your breaks" loading="lazy" width="1920" height="984" decoding="async" /></div></div></div>
     </div>
 
     <!-- Break Lists -->
@@ -510,7 +553,7 @@
           <li><span class="check" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.6 2.6L9.5 4" stroke="var(--green-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Dormant-buyer winback with copy-ready tags</li>
         </ul>
       </div>
-      <div class="feat-vis"><div class="frame"><div class="frame-inner"><img src="shot-analytics.jpg" alt="Breaker Tools Pro Analytics showing profit by break, revenue goal, and buyer insights" loading="lazy" /></div></div></div>
+      <div class="feat-vis"><div class="frame"><div class="frame-inner"><img src="shot-analytics.jpg" alt="Breaker Tools Pro Analytics showing profit by break, revenue goal, and buyer insights" loading="lazy" width="1752" height="898" decoding="async" /></div></div></div>
     </div>
 
     <div class="center reveal" style="margin-top:56px">
@@ -605,33 +648,6 @@
   </div>
 </section>
 
-<!-- TIME STACK -->
-<section aria-labelledby="time-title">
-  <div class="container">
-    <div class="center reveal" style="max-width:540px;margin:0 auto 48px">
-      <div class="s-label">Get your time back</div>
-      <h2 class="s-title" id="time-title">Now add up the hours.</h2>
-      <p class="s-sub">It's not just money. Here's what the old way quietly costs you in time every single month.</p>
-    </div>
-    <div class="slap" style="max-width:680px">
-      <div class="val-stack reveal">
-        <div class="vs-top"><h3>Time the old way demands</h3><span>Hours / month</span></div>
-        <div class="vrow"><span class="vn"><span class="dot"></span>Break lists, built by hand</span><span class="vp">13 hrs</span></div>
-        <div class="vrow"><span class="vn"><span class="dot"></span>Buyer follow-up &amp; outreach</span><span class="vp">9 hrs</span></div>
-        <div class="vrow"><span class="vn"><span class="dot"></span>Show setup (title, thumbnail, notes)</span><span class="vp">6 hrs</span></div>
-        <div class="vrow"><span class="vn"><span class="dot"></span>Post-break profit reconciliation</span><span class="vp">6 hrs</span></div>
-        <div class="vrow"><span class="vn"><span class="dot"></span>Inventory &amp; expense tracking</span><span class="vp">5 hrs</span></div>
-        <div class="vrow"><span class="vn"><span class="dot"></span>Break planning &amp; pricing</span><span class="vp">4 hrs</span></div>
-        <div class="vrow"><span class="vn"><span class="dot"></span>Sort &amp; pack</span><span class="vp">4 hrs</span></div>
-        <div class="vrow"><span class="vn"><span class="dot"></span>Knowing what to run next</span><span class="vp" style="color:var(--blue-lt)">priceless</span></div>
-        <div class="vs-total"><span>Hours back in your month</span><span class="tv"><span data-counter="45">0</span>+ hrs</span></div>
-      </div>
-      <p class="slap-line reveal rd-1">That's <b>more than a full work-week</b> back every month.<br>Hours you can put into more breaks, more buyers, and more profit.</p>
-      <p style="font-size:13px;color:var(--text-3);margin-top:18px">Based on the average breaker running about 3 shows a week. Run more, save more.</p>
-    </div>
-  </div>
-</section>
-
 <!-- PRICING -->
 <section class="pricing" id="pricing" aria-labelledby="pricing-title">
   <div class="container">
@@ -652,6 +668,23 @@
         <div class="vrow bonus"><span class="vn"><span class="dot"></span>Bonus: 5-minute fast-start walkthrough</span><span class="vp">$47 free</span></div>
         <div class="vs-total"><span>Total value</span><span class="tv">$5,276</span></div>
       </div>
+
+      <p class="slap-line reveal rd-1" style="margin:30px auto 0;font-size:clamp(18px,2.3vw,23px)">And that's <b>just the money.</b> Now add the time you get back.</p>
+
+      <div class="val-stack reveal rd-1" style="margin-top:20px">
+        <div class="vs-top"><h3>Time the old way demands</h3><span>Hours / month</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Break lists, built by hand</span><span class="vp">13 hrs</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Buyer follow-up &amp; outreach</span><span class="vp">9 hrs</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Show setup (title, thumbnail, notes)</span><span class="vp">6 hrs</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Post-break profit reconciliation</span><span class="vp">6 hrs</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Inventory &amp; expense tracking</span><span class="vp">5 hrs</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Break planning &amp; pricing</span><span class="vp">4 hrs</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Sort &amp; pack</span><span class="vp">4 hrs</span></div>
+        <div class="vrow"><span class="vn"><span class="dot"></span>Knowing what to run next</span><span class="vp" style="color:var(--blue-lt)">priceless</span></div>
+        <div class="vs-total"><span>Hours back in your month</span><span class="tv"><span data-counter="45">0</span>+ hrs</span></div>
+      </div>
+      <p style="font-size:13px;color:var(--text-3);margin:14px 0 0;text-align:center">More than a full work-week back every month. Based on the average breaker running ~3 shows a week.</p>
+
       <p class="slap-line reveal rd-1">You don't pay <s>$5,276</s>. You don't even pay <s>$39/mo</s>.<br><b>As a founder, you pay just</b></p>
       <div class="slap-price reveal rd-1">$29<small>/mo</small></div>
     </div>
@@ -693,14 +726,12 @@
   <div class="container">
     <div class="center reveal" style="margin-bottom:52px"><div class="s-label">Real results</div><h2 class="s-title" id="testi-title">From breakers who stopped guessing.</h2></div>
     <div class="testi-grid">
-      <div class="t-card featured reveal">
+      <div class="t-card featured reveal" style="max-width:640px;margin:0 auto">
         <div class="t-stars" aria-label="5 out of 5 stars">★★★★★</div>
         <p class="t-text">"We went from zero to $40,000 in sales in our first 100 days on Whatnot, starting with limited inventory and no following. These tools gave us the roadmap and the live profit tracking to actually know what we were doing. We're about to hit premier shop status and I genuinely don't know how we'd run our shows without it."</p>
         <div class="t-author"><div class="t-av" aria-hidden="true">BB</div><div><div class="t-name">Bleacher Boys</div><div class="t-handle">Whatnot · Founding user</div></div></div>
       </div>
-      <!-- SWAP: replace placeholders with real early-access quotes before launch -->
-      <div class="t-card reveal rd-1"><div class="t-stars" aria-label="5 out of 5 stars">★★★★★</div><p class="t-text">"[Early-access breaker testimonial. Replace before launch. Pull a real quote from one of your first free-week users here.]"</p><div class="t-author"><div class="t-av" aria-hidden="true" style="background:var(--card-hover)">?</div><div><div class="t-name">Early-access breaker</div><div class="t-handle">Whatnot</div></div></div></div>
-      <div class="t-card reveal rd-2"><div class="t-stars" aria-label="5 out of 5 stars">★★★★★</div><p class="t-text">"[Early-access breaker testimonial. Replace before launch. Pull a real quote from one of your first free-week users here.]"</p><div class="t-author"><div class="t-av" aria-hidden="true" style="background:var(--card-hover)">?</div><div><div class="t-name">Early-access breaker</div><div class="t-handle">Whatnot</div></div></div></div>
+      <!-- TODO: add 2 more real early-access quotes here, then restore the grid (max-width on featured card can come off once there are 3). -->
     </div>
   </div>
 </section>
