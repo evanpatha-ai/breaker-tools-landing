@@ -11,15 +11,5 @@
     <priority>0.8</priority>
   </url>
   <!-- POSTS:START — the daily routine appends one <url> per published post -->
-  <url>
-    <loc>https://breakertools.pro/blog/card-breaking-software</loc>
-    <lastmod>2026-07-08</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://breakertools.pro/blog/how-to-price-a-card-break</loc>
-    <lastmod>2026-07-08</lastmod>
-    <priority>0.7</priority>
-  </url>
   <!-- POSTS:END -->
 </urlset>

@@ -2,6 +2,8 @@
 
 This file is the instruction set for the automated daily blog routine. A scheduled Claude agent reads this spec, generates post ideas, writes one post, and opens a PR. **A post only publishes when Evan merges the PR.**
 
+> **Hard rule, no exceptions:** every post — including the very first one ever written — goes through a PR on a `blog/*` branch. Never commit or push a post directly to `main`. This applies whether the routine is running on schedule or Claude is asked to write a post ad hoc in a chat session.
+
 ## The daily process
 1. **Research (15 min max):** Check what's current — new sports card releases, TCG sets (Pokémon, One Piece, Lorcana), Whatnot/TikTok/eBay Live seller news, breaking community topics. Read `public/blog/` to see every existing post — never duplicate a topic or target keyword.
 2. **Generate 3 ideas**, ranked. Each idea = working title + target keyword + one-line rationale (why this, why now). Mix per the 80/20 rule below.
@@ -46,5 +48,4 @@ Merge = publish. Close = skip today.
 ## Published log
 | Date | Post | Target keyword |
 |------|------|----------------|
-| 2026-07-08 | how-to-price-a-card-break | how to price a card break |
-| 2026-07-08 | card-breaking-software | card breaking software |
+| _(none yet — all posts require an approved PR)_ | | |
