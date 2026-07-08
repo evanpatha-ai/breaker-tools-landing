@@ -16,11 +16,11 @@
 ## 🔴 Critical — before sharing the link anywhere
 | Task | Owner | Notes |
 |------|-------|-------|
-| Enable Web Analytics in Vercel dashboard | **You** | Project → Analytics → Enable. Script is already on the page. |
+| Enable Web Analytics in Vercel dashboard | **You** | ✅ Done |
 | Set Stripe trial to 7 days | **You** | `trial_period_days: 7` in the checkout config (breaker-tools-pro repo / Stripe dashboard) |
 | Change app billing copy "14-day" → "7-day" | Claude (say go) | `src/pages/Settings.jsx` line ~236 in breaker-tools-pro |
-| Verify /privacy and /terms exist on breakertools.pro | Claude (say go) | Footer links are root-relative; likely 404 on the marketing domain. Fix: point them to app.breakertools.pro/privacy + /terms |
-| Keep founder-spot count truthful | **You** | Hero badge + pricing bar are hardcoded "7 of 25" — update by hand as real spots sell (app tracks via getFounderSpots) |
+| Verify /privacy and /terms exist on breakertools.pro | Claude | ✅ Done — footer links now point to app.breakertools.pro/privacy + /terms (verified 200) |
+| Keep founder-spot count truthful | **You** | ✅ Reset to honest "0 of 25 claimed" (was fabricated). Hardcoded in `public/index.html` (hero badge + pricing bar) and in `.claude` notes here — not in Squarespace, not in the app. Tell Claude the real number and it updates both spots + the progress-bar fill. |
 
 ## 🟠 High-leverage conversion wins — this week
 | Task | Owner | Notes |
