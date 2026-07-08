@@ -1,0 +1,50 @@
+# Breaker Blog — Daily Post System Spec
+
+This file is the instruction set for the automated daily blog routine. A scheduled Claude agent reads this spec, generates post ideas, writes one post, and opens a PR. **A post only publishes when Evan merges the PR.**
+
+## The daily process
+1. **Research (15 min max):** Check what's current — new sports card releases, TCG sets (Pokémon, One Piece, Lorcana), Whatnot/TikTok/eBay Live seller news, breaking community topics. Read `public/blog/` to see every existing post — never duplicate a topic or target keyword.
+2. **Generate 3 ideas**, ranked. Each idea = working title + target keyword + one-line rationale (why this, why now). Mix per the 80/20 rule below.
+3. **Write the #1 idea in full** (the other 2 go in the PR description as alternates for tomorrow).
+4. **Open a PR** to `main` titled `Blog: <post title>` with the 3 ideas listed in the body. Branch name: `blog/YYYY-MM-DD`.
+
+## Content rules
+- **Mix:** ~80% breaker education (pricing, strategy, platform guides, release breakdowns, growth tactics), ~20% product (new Breaker Tools Pro features, use cases). Product mentions inside education posts should be natural and earn their place.
+- **Voice:** Evan — The Bleacher Boys. Practitioner, direct, zero fluff, talks like a breaker not a marketer. First person plural ("we run our breaks..."). Don't lead with revenue claims; credibility comes from specificity.
+- **Never fabricate:** no invented statistics, fake quotes, made-up case studies, or fee numbers you haven't verified. If platform fees may have changed, hedge ("typical," "as of this writing").
+- **No em dashes in marketing copy on the landing page** applies to the landing page only; blog posts may use them.
+- **Never use the abbreviation "BTP".** Always "Breaker Tools Pro."
+- **Length:** 1,200–1,800 words. Substance over volume — one genuinely useful post beats three thin ones. If the day's best idea is thin, write the second idea instead.
+- **Every post must:** answer a real search query fully, include one concrete worked example or table, link to the free calculator (https://app.breakertools.pro/calculator) and at least one other blog post, and end with the CTA band + author box.
+
+## Target keyword universe (grow this list over time)
+Head terms (long game): card breaking software, breaking software, sports card breaking software, whatnot breaker tools, break management software.
+Long-tail (win these first): how to price a card break, whatnot fee calculator, break even calculator sports cards, how to start breaking on whatnot, whatnot seller fees breakdown, provably fair spinner breaks, card break spinner, how to make money breaking cards, pokemon break list generator, player break checklist [set name], whatnot vs tiktok shop for breakers, obs overlay for card breaks, card breaking profit margin.
+One keyword = one post. Track which posts target which keyword in this file's log below.
+
+## Technical steps for each post
+1. **Create** `public/blog/<slug>.html`. Copy the exact structure of `public/blog/how-to-price-a-card-break.html` (head meta, Article JSON-LD, nav, breadcrumbs, meta row, CTA band, author box, footer). Slug: lowercase, hyphens, keyword-bearing, no dates.
+2. **Update** `public/blog/index.html`: insert a new `<a class="b-card">` at the TOP of the `POSTS:START` block.
+3. **Update** `public/blog/feed.xml`: insert a new `<item>` at the TOP of the `ITEMS:START` block.
+4. **Update** `public/sitemap.xml`: add a `<url>` inside the `POSTS:START` block with today's `lastmod`.
+5. **Verify** all four files parse (valid HTML/XML) and every internal link resolves to a file that exists.
+6. Commit all four files in one commit on branch `blog/YYYY-MM-DD`, open the PR.
+
+## PR description template
+```
+## Today's post
+**<Title>** — targets "<keyword>"
+<2-sentence summary>
+
+## Alternate ideas (not written)
+2. <title> — <keyword> — <why>
+3. <title> — <keyword> — <why>
+
+Merge = publish. Close = skip today.
+```
+
+## Published log
+| Date | Post | Target keyword |
+|------|------|----------------|
+| 2026-07-08 | how-to-price-a-card-break | how to price a card break |
+| 2026-07-08 | card-breaking-software | card breaking software |

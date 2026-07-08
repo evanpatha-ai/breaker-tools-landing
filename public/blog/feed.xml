@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>The Breaker Blog — Breaker Tools Pro</title>
+  <link>https://breakertools.pro/blog/</link>
+  <description>Practical pricing, strategy, and tooling guides for card breakers.</description>
+  <language>en-us</language>
+  <atom:link href="https://breakertools.pro/blog/feed.xml" rel="self" type="application/rss+xml" />
+  <!-- ITEMS:START — newest first. The daily routine inserts new items at the top. -->
+  <item>
+    <title>Card Breaking Software in 2026: What Serious Breakers Actually Use</title>
+    <link>https://breakertools.pro/blog/card-breaking-software</link>
+    <guid>https://breakertools.pro/blog/card-breaking-software</guid>
+    <pubDate>Wed, 08 Jul 2026 12:00:00 GMT</pubDate>
+    <description>Spinners, overlays, spreadsheets, and all-in-one platforms — what each category really costs, and the six questions to ask before paying for any of it.</description>
+  </item>
+  <item>
+    <title>How to Price a Card Break So You Actually Profit</title>
+    <link>https://breakertools.pro/blog/how-to-price-a-card-break</link>
+    <guid>https://breakertools.pro/blog/how-to-price-a-card-break</guid>
+    <pubDate>Wed, 08 Jul 2026 12:00:00 GMT</pubDate>
+    <description>The exact formula: true total cost, platform fee gross-up, break-even per spot, and the three margin tiers.</description>
+  </item>
+  <!-- ITEMS:END -->
+</channel>
+</rss>
