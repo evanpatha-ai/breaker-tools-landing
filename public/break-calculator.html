@@ -38,7 +38,7 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      { "@type": "Question", "name": "How do you calculate the break-even price for a card break?", "acceptedAnswer": { "@type": "Answer", "text": "Break-even price per spot = (total cost ÷ number of spots) ÷ (1 − platform fee %). You divide by (1 − fee%) rather than just adding the fee, because the platform's cut also applies to the amount you add to cover the fee." } },
+      { "@type": "Question", "name": "How do you calculate the break-even price for a card break?", "acceptedAnswer": { "@type": "Answer", "text": "Break-even price per spot = (total cost ÷ number of spots + the platform's flat per-order fee) ÷ (1 − platform fee %). You divide by (1 − fee%) rather than just adding the fee, because the platform's cut also applies to the amount you add to cover the fee." } },
       { "@type": "Question", "name": "What fees does Whatnot take on a break?", "acceptedAnswer": { "@type": "Answer", "text": "As of this writing Whatnot typically takes around 8% commission plus roughly 2.9% + $0.30 payment processing, so plan for about 11% off the top of each spot. Confirm the current rate in your Whatnot seller dashboard, since fees change." } },
       { "@type": "Question", "name": "Is this break calculator free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, this calculator is free with no account required. Breaker Tools Pro also offers a full version inside the app that saves your breaks, tracks live profit on your stream, and builds break lists." } }
     ]
@@ -95,6 +95,21 @@
     .plat-btn{background:var(--bg);border:1px solid var(--border-md);border-radius:10px;color:var(--text-2);font-size:13px;font-weight:700;font-family:inherit;padding:11px 6px;cursor:pointer;transition:all .18s;text-align:center}
     .plat-btn.active{border-color:var(--blue);background:rgba(59,130,246,.12);color:var(--text)}
     .fee-note{font-size:12px;color:var(--text-3);margin-top:8px}
+    .lbl-hint{font-weight:400;color:var(--text-3)}
+    .sport-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+    .sport-btn{background:var(--bg);border:1px solid var(--border-md);border-radius:10px;color:var(--text-2);font-size:12px;font-weight:700;font-family:inherit;padding:10px 4px;cursor:pointer;transition:all .18s;text-align:center;line-height:1.5}
+    .sport-btn small{color:var(--text-3);font-weight:500;font-size:10.5px}
+    .sport-btn.active{border-color:var(--blue);background:rgba(59,130,246,.12);color:var(--text)}
+    .fee-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+    .fee-grid label{display:block;font-size:12.5px;font-weight:600;color:var(--text-2);margin-bottom:6px}
+    .roi-readout{float:right;font-family:'Sora',sans-serif;font-weight:800;color:var(--blue-lt);font-size:15px}
+    input[type=range]{width:100%;accent-color:var(--blue);margin:10px 0 8px;cursor:pointer}
+    .roi-presets{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+    .roi-presets button{background:var(--bg);border:1px solid var(--border-md);border-radius:8px;color:var(--text-2);font-size:12.5px;font-weight:700;font-family:inherit;padding:8px 4px;cursor:pointer;line-height:1.3}
+    .roi-presets button small{display:block;font-size:9.5px;color:var(--text-3);font-weight:500}
+    .roi-presets button.active{border-color:var(--blue);background:rgba(59,130,246,.14);color:var(--text)}
+    .be-tier{border-color:rgba(251,191,36,.3)}
+    .be-tier .t-price{color:var(--amber)}
 
     /* Results */
     .results{display:flex;flex-direction:column;gap:16px}
@@ -179,31 +194,63 @@
       <div class="input-wrap"><span class="pre">$</span><input class="has-pre" type="number" id="supplies" value="20" min="0" step="1" inputmode="decimal" /></div>
     </div>
     <div class="field">
+      <label>Game / sport <span class="lbl-hint">(sets the usual spot count)</span></label>
+      <div class="sport-row" id="sportRow">
+        <button type="button" class="sport-btn active" data-spots="32">🏈<br>NFL<br><small>32 spots</small></button>
+        <button type="button" class="sport-btn" data-spots="30">🏀<br>NBA<br><small>30 spots</small></button>
+        <button type="button" class="sport-btn" data-spots="30">⚾<br>MLB<br><small>30 spots</small></button>
+        <button type="button" class="sport-btn" data-spots="">🎴<br>TCG<br><small>custom</small></button>
+        <button type="button" class="sport-btn" data-spots="">✏️<br>Other<br><small>custom</small></button>
+      </div>
+    </div>
+    <div class="field">
       <label for="spots">Number of spots</label>
       <input type="number" id="spots" value="32" min="1" step="1" inputmode="numeric" />
     </div>
     <div class="field">
       <label>Platform</label>
       <div class="platform-row" id="platformRow">
-        <button type="button" class="plat-btn active" data-fee="11">Whatnot<br>~11%</button>
-        <button type="button" class="plat-btn" data-fee="6">TikTok<br>~6%</button>
-        <button type="button" class="plat-btn" data-fee="13.25">eBay Live<br>~13.25%</button>
+        <button type="button" class="plat-btn active" data-pct="10.9" data-flat="0.30">Whatnot</button>
+        <button type="button" class="plat-btn" data-pct="6" data-flat="0.30">TikTok</button>
+        <button type="button" class="plat-btn" data-pct="12.35" data-flat="0.40">eBay Live</button>
       </div>
-      <div class="field" style="margin-top:12px">
-        <label for="feePct">Platform fee % (edit if yours differs)</label>
-        <input type="number" id="feePct" value="11" min="0" max="90" step="0.25" inputmode="decimal" />
+      <p class="fee-note" id="feeDetail">Whatnot — 8% platform + 2.9% processing + $0.30/order</p>
+      <div class="fee-grid">
+        <div>
+          <label for="feePct">Fee %</label>
+          <input type="number" id="feePct" value="10.9" min="0" max="90" step="0.05" inputmode="decimal" />
+        </div>
+        <div>
+          <label for="feeFlat">Flat fee / spot</label>
+          <div class="input-wrap"><span class="pre">$</span><input class="has-pre" type="number" id="feeFlat" value="0.30" min="0" step="0.05" inputmode="decimal" /></div>
+        </div>
       </div>
-      <p class="fee-note">Typical, as of this writing — always confirm your current rate in your seller dashboard.</p>
+      <p class="fee-note">Typical, as of this writing — edit if your rate differs.</p>
     </div>
   </div>
 
   <div class="panel">
     <h2>What to charge</h2>
     <div class="results">
+      <div class="field" style="margin-bottom:4px">
+        <label>ROI target <span class="roi-readout"><span id="roiVal">30</span>%</span></label>
+        <input type="range" id="roiSlider" min="10" max="200" step="5" value="30" />
+        <div class="roi-presets" id="roiPresets">
+          <button type="button" data-roi="20">20%</button>
+          <button type="button" data-roi="30" class="active">30%<small>avg</small></button>
+          <button type="button" data-roi="50">50%</button>
+          <button type="button" data-roi="100">100%</button>
+          <button type="button" data-roi="150">150%</button>
+        </div>
+      </div>
       <div class="be-card">
-        <div class="lbl">Break-even per spot</div>
-        <div class="val" id="beVal">$0.00</div>
-        <div class="sub" id="beSub">This is your floor — anything less loses money.</div>
+        <div class="lbl">Your price at <span id="roiLbl">30</span>% ROI</div>
+        <div class="val" id="targetVal">$0.00</div>
+        <div class="sub" id="targetSub"></div>
+      </div>
+      <div class="tier be-tier">
+        <div class="t-name">Break-even<small>your floor — anything less loses money</small></div>
+        <div class="t-price" id="beVal">$0.00</div>
       </div>
       <div class="tiers" id="tiers"></div>
       <div class="warn" id="warn" style="display:none"></div>
@@ -230,20 +277,20 @@
 
     <h3>The formula</h3>
     <p>Break-even isn't just cost divided by spots. The platform takes its cut off the top of every sale, so you have to gross that back up:</p>
-    <div class="formula">Break-even per spot = (Total cost ÷ Spots) ÷ (1 − Platform fee %)</div>
+    <div class="formula">Break-even per spot = (Total cost ÷ Spots + flat fee) ÷ (1 − Platform fee %)</div>
     <p>The division at the end is the part most breakers skip. Subtracting the fee from your price understates what you need to charge, because the fee also applies to the extra you add to cover the fee. Dividing by (1 − fee%) is what actually gets you back to even.</p>
 
     <h3>A worked example</h3>
     <p>Say a box cost you <strong>$450</strong>, you're adding <strong>$20</strong> in extra costs (shipping, supplies), and selling <strong>32 spots</strong> on Whatnot at a typical ~11% take:</p>
-    <div class="formula">($470 ÷ 32) ÷ (1 − 0.11) = $16.51 break-even per spot</div>
-    <p>Notice that's more than the naive "$470 ÷ 32 = $14.69." The $1.82 gap per spot is the platform fee you'd have quietly eaten. Across 32 spots that's about $58 — often the entire difference between a profitable break and a losing one.</p>
+    <div class="formula">($470 ÷ 32 + $0.30) ÷ (1 − 0.109) = $16.82 break-even per spot</div>
+    <p>Notice that's more than the naive "$470 ÷ 32 = $14.69." The $2.13 gap per spot is the platform's cut you'd have quietly eaten. Across 32 spots that's about $68 — often the entire difference between a profitable break and a losing one.</p>
 
     <h2>What the platforms take</h2>
     <table>
       <tr><th>Platform</th><th>Typical seller cost (as of this writing)</th></tr>
-      <tr><td>Whatnot</td><td>~8% commission + ~2.9% + $0.30 processing ≈ 11%</td></tr>
-      <tr><td>TikTok Shop</td><td>~6% (promo rates vary; standard is higher)</td></tr>
-      <tr><td>eBay Live</td><td>~13.25% typical for cards under $7,500</td></tr>
+      <tr><td>Whatnot</td><td>8% commission + 2.9% processing + $0.30 per order (~10.9% + flat)</td></tr>
+      <tr><td>TikTok Shop</td><td>~6% + $0.30 per order (promo rates vary; standard is higher)</td></tr>
+      <tr><td>eBay Live</td><td>~12.35% + $0.40 per order, typical for cards under $7,500</td></tr>
     </table>
     <p>Fees change, and can vary by category or promotion, so treat these as starting points and confirm your real rate in your seller dashboard. The calculator lets you type in your exact number.</p>
 
@@ -276,53 +323,100 @@
   const $ = id => document.getElementById(id);
   const fmt = n => '$' + (isFinite(n) ? n : 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-  // Margin tiers mirror the in-app calculator's ROI targets.
+  // Fee model + spot-price formula are the SAME math as the Breaker Tools Pro
+  // app (src/lib/fees.js): price = (cost×(1+roi)/spots + flat) ÷ (1 − pct).
+  // Flat fee is charged per order by the platforms; estimating per spot is
+  // slightly pessimistic for multi-spot buyers — same tradeoff the app makes.
+  const FEE_DETAIL = {
+    '10.9': 'Whatnot — 8% platform + 2.9% processing + $0.30/order',
+    '6': 'TikTok Shop — ~6% + $0.30/order (promo rates vary)',
+    '12.35': 'eBay Live — ~12.35% + $0.40/order (cards under $7.5K)',
+  };
+
+  // Named tiers mirror the in-app calculator's ROI presets.
   const TIERS = [
-    { name: 'Conservative', note: '25% ROI · fills fast', roi: 0.25, feat: false },
-    { name: 'Standard', note: '50% ROI · most breaks', roi: 0.50, feat: true },
-    { name: 'Aggressive', note: '100% ROI · hot products', roi: 1.00, feat: false },
+    { name: 'Conservative', note: '25% ROI · fills fast', roi: 0.25 },
+    { name: 'Standard', note: '50% ROI · most breaks', roi: 0.50 },
+    { name: 'Aggressive', note: '100% ROI · hot products', roi: 1.00 },
   ];
+
+  function spotPrice(costPerSpot, roi, pct, flat) {
+    return (costPerSpot * (1 + roi) + flat) / (1 - pct);
+  }
 
   function calc() {
     const cost = (parseFloat($('boxCost').value) || 0) + (parseFloat($('supplies').value) || 0);
     const spots = Math.max(1, parseInt($('spots').value) || 1);
-    const feePct = Math.min(0.9, Math.max(0, (parseFloat($('feePct').value) || 0) / 100));
+    const pct = Math.min(0.9, Math.max(0, (parseFloat($('feePct').value) || 0) / 100));
+    const flat = Math.max(0, parseFloat($('feeFlat').value) || 0);
+    const roi = (parseInt($('roiSlider').value) || 30) / 100;
     const costPerSpot = cost / spots;
-    const breakEven = costPerSpot / (1 - feePct);
 
-    $('beVal').textContent = fmt(breakEven);
+    // Headline: price at the chosen ROI target
+    const target = spotPrice(costPerSpot, roi, pct, flat);
+    $('targetVal').textContent = fmt(target);
+    $('targetSub').textContent = `${fmt(cost * roi)} profit on this break · ${fmt(target * spots)} total sales`;
+    $('roiVal').textContent = Math.round(roi * 100);
+    $('roiLbl').textContent = Math.round(roi * 100);
 
-    const warn = $('warn');
-    if (feePct >= 0.5) { warn.style.display = 'block'; warn.textContent = '⚠️ A fee over 50% is unusually high — double-check your platform rate.'; }
-    else { warn.style.display = 'none'; }
+    // Floor
+    $('beVal').textContent = fmt(spotPrice(costPerSpot, 0, pct, flat));
 
-    // price so that net-of-fee revenue per spot = costPerSpot * (1 + ROI)
-    const rows = TIERS.map(t => {
-      const price = costPerSpot * (1 + t.roi) / (1 - feePct);
-      const profit = cost * t.roi; // net profit across the whole break
-      return `<div class="tier ${t.feat ? 'feat' : ''}">
+    // Named tiers — highlight whichever is closest to the chosen target
+    const rows = TIERS.map(t => `<div class="tier ${Math.abs(t.roi - roi) < 0.03 ? 'feat' : ''}">
         <div class="t-name">${t.name}<small>${t.note}</small></div>
-        <div class="t-price">${fmt(price)}<small>+${fmt(profit)} profit</small></div>
-      </div>`;
-    }).join('');
+        <div class="t-price">${fmt(spotPrice(costPerSpot, t.roi, pct, flat))}<small>+${fmt(cost * t.roi)} profit</small></div>
+      </div>`).join('');
     $('tiers').innerHTML = rows;
+
+    // Warnings — mirror the app's thin-margin / sanity checks
+    const warn = $('warn');
+    if (pct >= 0.5) { warn.style.display = 'block'; warn.textContent = '⚠️ A fee over 50% is unusually high — double-check your platform rate.'; }
+    else if (roi < 0.15) { warn.style.display = 'block'; warn.textContent = '⚠️ Thin margin — under 15% ROI leaves little room for a slow room or a comped spot.'; }
+    else { warn.style.display = 'none'; }
   }
 
-  // Platform buttons set the fee field
+  // Sport presets set the usual spot count (TCG/Other leave it custom)
+  $('sportRow').addEventListener('click', e => {
+    const btn = e.target.closest('.sport-btn');
+    if (!btn) return;
+    document.querySelectorAll('.sport-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    if (btn.dataset.spots) $('spots').value = btn.dataset.spots;
+    calc();
+  });
+
+  // Platform buttons set both fee fields + the detail line
   $('platformRow').addEventListener('click', e => {
     const btn = e.target.closest('.plat-btn');
     if (!btn) return;
     document.querySelectorAll('.plat-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    $('feePct').value = btn.dataset.fee;
+    $('feePct').value = btn.dataset.pct;
+    $('feeFlat').value = btn.dataset.flat;
+    $('feeDetail').textContent = FEE_DETAIL[btn.dataset.pct] || '';
     calc();
   });
 
-  // Typing a custom fee de-selects the platform presets unless it matches one
-  ['boxCost', 'supplies', 'spots', 'feePct'].forEach(id => $(id).addEventListener('input', () => {
-    if (id === 'feePct') {
-      const v = $('feePct').value;
-      document.querySelectorAll('.plat-btn').forEach(b => b.classList.toggle('active', b.dataset.fee === v));
+  // ROI slider + presets stay in sync
+  $('roiSlider').addEventListener('input', () => {
+    const v = $('roiSlider').value;
+    document.querySelectorAll('#roiPresets button').forEach(b => b.classList.toggle('active', b.dataset.roi === v));
+    calc();
+  });
+  $('roiPresets').addEventListener('click', e => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    $('roiSlider').value = btn.dataset.roi;
+    document.querySelectorAll('#roiPresets button').forEach(b => b.classList.toggle('active', b === btn));
+    calc();
+  });
+
+  // Custom fee edits de-select platform presets unless they still match
+  ['boxCost', 'supplies', 'spots', 'feePct', 'feeFlat'].forEach(id => $(id).addEventListener('input', () => {
+    if (id === 'feePct' || id === 'feeFlat') {
+      document.querySelectorAll('.plat-btn').forEach(b =>
+        b.classList.toggle('active', b.dataset.pct === $('feePct').value && parseFloat(b.dataset.flat) === parseFloat($('feeFlat').value)));
     }
     calc();
   }));
