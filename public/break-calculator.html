@@ -110,6 +110,11 @@
     .tier .t-price{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;text-align:right}
     .tier .t-price small{display:block;font-weight:500;color:var(--green-lt);font-size:12px;margin-top:2px;font-family:'Inter',sans-serif}
     .warn{background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);color:var(--amber);border-radius:10px;padding:12px 14px;font-size:13px;font-weight:600}
+    .mini-cta{border-top:1px solid var(--border);padding-top:18px;text-align:center}
+    .mini-cta p{font-size:13.5px;color:var(--text-2);line-height:1.6;margin-bottom:14px}
+    .mini-cta p strong{color:var(--text)}
+    .mini-cta .nav-cta{display:inline-block}
+    .mini-fine{display:block;font-size:11.5px;color:var(--text-3);margin-top:10px}
 
     /* CTA band */
     .cta-band{max-width:940px;margin:34px auto 0;background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(34,211,238,.06));border:1px solid var(--border-md);border-radius:var(--r-lg);padding:30px;text-align:center}
@@ -170,7 +175,7 @@
       <div class="input-wrap"><span class="pre">$</span><input class="has-pre" type="number" id="boxCost" value="450" min="0" step="1" inputmode="decimal" /></div>
     </div>
     <div class="field">
-      <label for="supplies">Shipping &amp; supplies (optional)</label>
+      <label for="supplies">Extra costs — shipping, supplies, etc. (optional)</label>
       <div class="input-wrap"><span class="pre">$</span><input class="has-pre" type="number" id="supplies" value="20" min="0" step="1" inputmode="decimal" /></div>
     </div>
     <div class="field">
@@ -202,6 +207,11 @@
       </div>
       <div class="tiers" id="tiers"></div>
       <div class="warn" id="warn" style="display:none"></div>
+      <div class="mini-cta">
+        <p>These numbers are one break. The full suite tracks this profit <strong>live on your stream</strong>, saves every break, and tells you what to run next.</p>
+        <a href="https://app.breakertools.pro/api/start-trial?plan=founder" class="nav-cta">Start your 7-day free trial →</a>
+        <span class="mini-fine">No charge until day 8 · Cancel anytime</span>
+      </div>
     </div>
   </div>
 </section>
@@ -224,7 +234,7 @@
     <p>The division at the end is the part most breakers skip. Subtracting the fee from your price understates what you need to charge, because the fee also applies to the extra you add to cover the fee. Dividing by (1 − fee%) is what actually gets you back to even.</p>
 
     <h3>A worked example</h3>
-    <p>Say a box cost you <strong>$450</strong>, you're adding <strong>$20</strong> in supplies, and selling <strong>32 spots</strong> on Whatnot at a typical ~11% take:</p>
+    <p>Say a box cost you <strong>$450</strong>, you're adding <strong>$20</strong> in extra costs (shipping, supplies), and selling <strong>32 spots</strong> on Whatnot at a typical ~11% take:</p>
     <div class="formula">($470 ÷ 32) ÷ (1 − 0.11) = $16.51 break-even per spot</div>
     <p>Notice that's more than the naive "$470 ÷ 32 = $14.69." The $1.82 gap per spot is the platform fee you'd have quietly eaten. Across 32 spots that's about $58 — often the entire difference between a profitable break and a losing one.</p>
 
