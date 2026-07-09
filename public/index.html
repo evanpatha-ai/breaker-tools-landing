@@ -795,6 +795,20 @@
 </footer>
 
 <script>
+  // The browser's native on-load hash scroll can miss its target on a long,
+  // image-heavy page like this one — it fires before below-the-fold images
+  // finish loading and push the final layout height into place, so a deep
+  // anchor (e.g. returning from a cancelled Stripe checkout) can land back
+  // at the top instead. Re-run the scroll once things have settled.
+  if (location.hash) {
+    addEventListener('load', () => {
+      setTimeout(() => {
+        const target = document.querySelector(location.hash);
+        if (target) target.scrollIntoView({ block: 'start' });
+      }, 300);
+    });
+  }
+
   const nav = document.getElementById('main-nav');
   addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), { passive:true });
 
