@@ -18,7 +18,7 @@ a { color:var(--blue-lt); }
 .b-nav { position:sticky; top:0; z-index:100; background:rgba(6,11,23,.85); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); padding:14px 0; }
 .b-nav-inner { max-width:1100px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
 .b-logo { display:flex; align-items:center; text-decoration:none; }
-.b-logo-img { height:30px; width:auto; display:block; }
+.b-logo-img { height:60px; width:auto; display:block; }
 .b-nav-right { display:flex; align-items:center; gap:10px; }
 .b-nav-link { color:var(--text-2); text-decoration:none; font-size:14px; font-weight:500; padding:8px 12px; }
 .b-nav-link:hover { color:var(--text); }
