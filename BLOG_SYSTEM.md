@@ -36,6 +36,8 @@ One keyword = one post. Track which posts target which keyword in this file's lo
 1. **Create** `public/blog/<slug>.html`. If another post already exists in `public/blog/`, copy its exact structure (head meta, Article JSON-LD, nav, breadcrumbs, meta row, CTA band, author box, footer) — it's the current source of truth for the pattern. If the blog is empty (no posts to copy from), build from the shared classes in `public/blog/blog.css` and match the head/meta conventions used on the landing page. Slug: lowercase, hyphens, keyword-bearing, no dates.
 
    **Clean URLs, always:** the site serves `cleanUrls: true` (see `public/vercel.json`), so every reference to a post is extensionless — `https://breakertools.pro/blog/<slug>` never `<slug>.html`. This applies to: `<link rel="canonical">`, `og:url`, the Article JSON-LD `mainEntityOfPage`, the blog index card `href`, the RSS `<link>`/`<guid>`, and the sitemap `<loc>`. The physical file on disk is still `<slug>.html` — only the *file* has the extension, never a URL pointing at it.
+
+   **Logo in the nav:** always the real product logo, never a placeholder icon or generated wordmark. Use `<img src="/logo.png" alt="Breaker Tools Pro" class="b-logo-img" width="176" height="88" />` inside the `<a class="b-logo">` — copy this exactly from `public/blog/index.html`'s nav if it's ever unclear. `public/logo.png` is the real brand asset (pulled from the app itself); don't invent a substitute.
 2. **Update** `public/blog/index.html`: insert a new `<a class="b-card">` at the TOP of the `POSTS:START` block.
 3. **Update** `public/blog/feed.xml`: insert a new `<item>` at the TOP of the `ITEMS:START` block.
 4. **Update** `public/sitemap.xml`: add a `<url>` inside the `POSTS:START` block with today's `lastmod`.

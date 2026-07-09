@@ -4,4 +4,5 @@ dist
 .claude/
 # Raw screenshot uploads — optimized shot-*.jpg are committed instead
 public/*.png
+!public/logo.png
 public/*.zip

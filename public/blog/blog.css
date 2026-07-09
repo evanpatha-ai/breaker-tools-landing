@@ -17,10 +17,8 @@ a { color:var(--blue-lt); }
 /* Nav */
 .b-nav { position:sticky; top:0; z-index:100; background:rgba(6,11,23,.85); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); padding:14px 0; }
 .b-nav-inner { max-width:1100px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
-.b-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
-.b-logo-icon { width:34px; height:34px; border-radius:9px; background:linear-gradient(135deg,var(--blue),var(--blue-dk)); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 14px var(--glow); flex-shrink:0; }
-.b-wordmark { font-size:12px; font-weight:900; letter-spacing:.05em; line-height:1.1; color:var(--text); font-family:'Sora',sans-serif; }
-.b-wordmark span { color:var(--blue-lt); }
+.b-logo { display:flex; align-items:center; text-decoration:none; }
+.b-logo-img { height:30px; width:auto; display:block; }
 .b-nav-right { display:flex; align-items:center; gap:10px; }
 .b-nav-link { color:var(--text-2); text-decoration:none; font-size:14px; font-weight:500; padding:8px 12px; }
 .b-nav-link:hover { color:var(--text); }
