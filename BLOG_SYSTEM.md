@@ -17,7 +17,7 @@ This file is the instruction set for the automated daily blog routine. A schedul
 - **No em dashes in marketing copy on the landing page** applies to the landing page only; blog posts may use them.
 - **Never use the abbreviation "BTP".** Always "Breaker Tools Pro."
 - **Length:** 1,200–1,800 words. Substance over volume — one genuinely useful post beats three thin ones. If the day's best idea is thin, write the second idea instead.
-- **Every post must:** answer a real search query fully, include one concrete worked example or table, link to the free calculator (https://app.breakertools.pro/calculator) and at least one other blog post, and end with the CTA band + author box.
+- **Every post must:** answer a real search query fully, include one concrete worked example or table, link to the free calculator SEO page (https://breakertools.pro/break-calculator — the static, indexable tool page; link here rather than the app URL so internal links build its ranking authority) and at least one other blog post, and end with the CTA band + author box.
 
 ## QUEUED NEXT POST (priority directive — do this before generating new ideas)
 Write the category-defining roundup: **"The 7 Best Card Breaking Software Tools in 2026 (Ranked by an Actual Breaker)"** — slug `best-card-breaking-software`, target keyword "best card breaking software" (secondary: "card breaking software").
