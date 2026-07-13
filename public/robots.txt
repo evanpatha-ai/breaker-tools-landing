@@ -1,4 +1,31 @@
+# Breaker Tools Pro — all crawlers welcome, including AI answer engines.
 User-agent: *
+Allow: /
+
+# Explicitly allow major AI/LLM crawlers so the product is discoverable and
+# citable in AI answers (ChatGPT, Claude, Perplexity, Google AI, etc.).
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: https://breakertools.pro/sitemap.xml

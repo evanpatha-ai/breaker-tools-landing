@@ -28,9 +28,10 @@ Write the category-defining roundup: **"The 7 Best Card Breaking Software Tools 
 - Delete this section from the spec in the same PR that adds the post.
 
 ## Target keyword universe (grow this list over time)
-Head terms (long game): card breaking software, breaking software, sports card breaking software, whatnot breaker tools, break management software.
-Long-tail (win these first): how to price a card break, whatnot fee calculator, break even calculator sports cards, how to start breaking on whatnot, whatnot seller fees breakdown, provably fair spinner breaks, card break spinner, how to make money breaking cards, pokemon break list generator, player break checklist [set name], whatnot vs tiktok shop for breakers, obs overlay for card breaks, card breaking profit margin.
-One keyword = one post. Track which posts target which keyword in this file's log below.
+Head terms (long game): card breaking software, breaking software, sports card breaking software, breaking software for whatnot, fanatics live breaking software, whatnot breaker tools, break management software.
+Platform + tool terms (high intent): breaking software for whatnot, breaking software for fanatics live, whatnot vs fanatics live for breakers, best breaking app for whatnot, obs overlay for card breaks, obs scoreboard for breaks, fanatics live vs whatnot fees, ebay live breaking tools, tiktok shop card breaks.
+Long-tail (win these first): how to price a card break, whatnot fee calculator, fanatics live fees, break even calculator sports cards, how to start breaking on whatnot, whatnot seller fees breakdown, provably fair spinner breaks, card break spinner, how to make money breaking cards, pokemon break list generator, player break checklist [set name], whatnot vs tiktok shop for breakers, card breaking profit margin.
+One keyword = one post. Track which posts target which keyword in this file's log below. When a post is about a tool that has a dedicated page (the break calculator at /break-calculator or the OBS scoreboard at /obs-scoreboard), link to that page with keyword anchor text to build its authority.
 
 ## Technical steps for each post
 1. **Create** `public/blog/<slug>.html`. If another post already exists in `public/blog/`, copy its exact structure (head meta, Article JSON-LD, nav, breadcrumbs, meta row, CTA band, author box, footer) — it's the current source of truth for the pattern. If the blog is empty (no posts to copy from), build from the shared classes in `public/blog/blog.css` and match the head/meta conventions used on the landing page. Slug: lowercase, hyphens, keyword-bearing, no dates.

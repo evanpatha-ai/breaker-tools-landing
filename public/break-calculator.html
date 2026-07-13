@@ -3,18 +3,180 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free Whatnot Break Calculator — Break-Even &amp; Profit per Spot | Breaker Tools Pro</title>
-  <meta name="description" content="Free card break calculator for Whatnot, TikTok Shop &amp; eBay Live. Enter your box cost, spots, and platform fees to get your break-even price per spot and profit at every margin tier — before you go live." />
-  <!-- The real, always-current calculator lives in the app. This page exists
-       only as a fallback redirect — vercel.json 307s /break-calculator to the
-       app before this file is ever served. One calculator, one codebase. -->
-  <link rel="canonical" href="https://app.breakertools.pro/calculator" />
-  <meta http-equiv="refresh" content="0; url=https://app.breakertools.pro/calculator" />
-  <meta name="theme-color" content="#060B17" />
+  <title>Free Break Calculator for Whatnot, Fanatics Live &amp; eBay — Break-Even per Spot | Breaker Tools Pro</title>
+  <meta name="description" content="Free card break calculator: enter box cost, spots, and platform fees to get your break-even price per spot and profit at every margin tier. Whatnot, TikTok Shop &amp; eBay Live fees built in — before you go live." />
+  <meta name="keywords" content="break calculator, whatnot break calculator, break even calculator sports cards, card break profit calculator, whatnot fee calculator, breaking calculator, card breaking profit margin" />
+  <link rel="canonical" href="https://breakertools.pro/break-calculator" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Free Break Calculator for Whatnot, Fanatics Live &amp; eBay" />
+  <meta property="og:description" content="Get your break-even price per spot and profit at every margin tier. Whatnot, TikTok Shop &amp; eBay Live fees built in." />
+  <meta property="og:url" content="https://breakertools.pro/break-calculator" />
+  <meta property="og:image" content="https://breakertools.pro/shot-calculator.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Break Calculator for Whatnot, Fanatics Live &amp; eBay" />
+  <meta name="twitter:description" content="Break-even price per spot and profit at every margin tier — fees for Whatnot, TikTok &amp; eBay built in." />
+  <meta name="twitter:image" content="https://breakertools.pro/shot-calculator.jpg" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <script>window.location.replace('https://app.breakertools.pro/calculator')</script>
+  <meta name="theme-color" content="#060B17" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@700;800&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Break Calculator",
+    "url": "https://breakertools.pro/break-calculator",
+    "applicationCategory": "BusinessApplication",
+    "applicationSubCategory": "Card Break Calculator",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Free break-even and profit calculator for sports card and TCG breaks on Whatnot, TikTok Shop, and eBay Live. Calculates break-even price per spot and profit at multiple margin tiers with platform fees included.",
+    "publisher": { "@type": "Organization", "name": "Breaker Tools Pro", "url": "https://breakertools.pro/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "How do you calculate the break-even price for a card break?", "acceptedAnswer": { "@type": "Answer", "text": "Break-even price per spot = (total cost ÷ number of spots + the platform's flat per-order fee) ÷ (1 − platform fee %). You divide by (1 − fee%) rather than just adding the fee, because the platform's cut also applies to the amount you add to cover the fee." } },
+      { "@type": "Question", "name": "What fees does Whatnot take on a break?", "acceptedAnswer": { "@type": "Answer", "text": "As of this writing Whatnot typically takes around 8% commission plus roughly 2.9% + $0.30 payment processing, so plan for about 11% off the top of each spot. Confirm the current rate in your Whatnot seller dashboard, since fees change." } },
+      { "@type": "Question", "name": "Does the calculator work for Fanatics Live and TikTok Shop?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The calculator has built-in fee presets for Whatnot, TikTok Shop, and eBay Live, plus a custom fee field so you can enter the exact rate for any other platform, including Fanatics Live." } },
+      { "@type": "Question", "name": "Is this break calculator free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, the calculator is free with no account required. The full Breaker Tools Pro app also saves every break, tracks live profit on your stream, and builds break lists." } }
+    ]
+  }
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#060B17;--surface:#0A1322;--card:#0E1B30;--card-2:#122544;
+      --border:rgba(96,165,250,.13);--border-md:rgba(96,165,250,.26);--border-str:rgba(96,165,250,.46);
+      --blue:#3B82F6;--blue-lt:#60A5FA;--blue-br:#7DB1FF;--blue-dk:#1D4ED8;--cyan:#22D3EE;--glow:rgba(59,130,246,.30);
+      --text:#F4F8FF;--text-2:#9FB0C9;--text-3:#5E708C;
+      --green:#10B981;--green-lt:#34D399;--amber:#FBBF24;--r:12px;--r-lg:18px;
+    }
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+    a{color:var(--blue-lt)}
+    .container{max-width:1080px;margin:0 auto;padding:0 24px}
+    .narrow{max-width:760px;margin:0 auto;padding:0 24px}
+    nav{position:sticky;top:0;z-index:100;background:rgba(6,11,23,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:12px 0}
+    .nav-inner{max-width:1080px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .nav-logo img{height:64px;width:auto;display:block}
+    .nav-right{display:flex;align-items:center;gap:10px}
+    .nav-link{color:var(--text-2);text-decoration:none;font-size:14px;font-weight:500;padding:8px 12px}
+    .nav-link:hover{color:var(--text)}
+    .nav-cta{background:linear-gradient(135deg,var(--blue),var(--blue-dk));color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:10px 18px;border-radius:11px;border:1px solid rgba(125,177,255,.4);box-shadow:0 6px 22px var(--glow);white-space:nowrap}
+    @media(max-width:620px){.nav-link.hide-m{display:none}.nav-logo img{height:48px}}
+    .hero{text-align:center;padding:56px 0 20px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-lt);margin-bottom:16px}
+    h1{font-family:'Sora',sans-serif;font-size:clamp(30px,5.4vw,50px);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin-bottom:16px}
+    h1 .accent{background:linear-gradient(110deg,var(--blue-lt),var(--cyan),var(--blue-br));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero p{font-size:18px;color:var(--text-2);max-width:640px;margin:0 auto 30px}
+    .hero-cta{display:inline-block;background:linear-gradient(135deg,var(--blue),var(--blue-dk));color:#fff;text-decoration:none;font-weight:800;font-size:16px;padding:15px 32px;border-radius:12px;border:1px solid rgba(125,177,255,.4);box-shadow:0 8px 30px var(--glow)}
+    .hero-fine{font-size:12.5px;color:var(--text-3);margin-top:14px}
+    .shot{max-width:940px;margin:44px auto 0;border-radius:var(--r-lg);padding:1px;background:linear-gradient(160deg,rgba(96,165,250,.55),transparent 60%);box-shadow:0 40px 100px rgba(0,0,0,.6)}
+    .shot img{width:100%;height:auto;display:block;border-radius:calc(var(--r-lg) - 1px)}
+    .content{padding:52px 0 20px}
+    .content h2{font-family:'Sora',sans-serif;font-size:27px;font-weight:800;letter-spacing:-.02em;margin:44px 0 14px}
+    .content h3{font-family:'Sora',sans-serif;font-size:18px;font-weight:700;margin:28px 0 10px}
+    .content p{font-size:16.5px;color:var(--text-2);margin-bottom:16px}
+    .content strong{color:var(--text)}
+    .content ul{margin:0 0 16px 22px;color:var(--text-2);font-size:16.5px}
+    .content li{margin-bottom:7px}
+    .formula{background:var(--card);border:1px solid var(--border-md);border-radius:var(--r);padding:16px 20px;font-family:ui-monospace,Menlo,monospace;font-size:15px;color:var(--blue-br);margin:6px 0 20px;overflow-x:auto}
+    table{width:100%;border-collapse:collapse;margin:6px 0 22px;font-size:15px}
+    th{text-align:left;padding:10px 14px;background:var(--card);color:var(--text);font-weight:700;border:1px solid var(--border)}
+    td{padding:10px 14px;border:1px solid var(--border);color:var(--text-2)}
+    details{border:1px solid var(--border);border-radius:var(--r);margin-bottom:10px;background:var(--card);overflow:hidden}
+    summary{padding:16px 20px;cursor:pointer;font-weight:700;font-family:'Sora',sans-serif;font-size:15.5px;list-style:none}
+    summary::-webkit-details-marker{display:none}
+    details[open] summary{border-bottom:1px solid var(--border)}
+    details p{padding:16px 20px 4px;margin:0}
+    .cta-band{max-width:940px;margin:40px auto;background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(34,211,238,.06));border:1px solid var(--border-md);border-radius:var(--r-lg);padding:34px 30px;text-align:center}
+    .cta-band h2{font-family:'Sora',sans-serif;font-size:24px;font-weight:800;letter-spacing:-.02em;margin:0 0 8px}
+    .cta-band p{color:var(--text-2);font-size:15px;margin-bottom:20px}
+    .cta-band .hero-cta{font-size:15px;padding:14px 28px}
+    .cta-band .fine{font-size:12.5px;color:var(--text-3);margin-top:14px}
+    footer{border-top:1px solid var(--border);padding:34px 0}
+    .foot-inner{max-width:1080px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--text-3)}
+    .foot-inner a{color:var(--text-3);text-decoration:none;margin-left:18px}.foot-inner a:hover{color:var(--text-2)}
+  </style>
 </head>
-<body style="background:#060B17;color:#8899bb;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0">
-  <p>Taking you to the free Break Calculator… <a href="https://app.breakertools.pro/calculator" style="color:#4f8eff">Continue</a></p>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Breaker Tools Pro home"><img src="/logo.png" alt="Breaker Tools Pro" width="200" height="100" /></a>
+    <div class="nav-right">
+      <a href="/obs-scoreboard" class="nav-link hide-m">OBS Scoreboard</a>
+      <a href="/blog/" class="nav-link hide-m">Blog</a>
+      <a href="/#pricing" class="nav-link hide-m">Pricing</a>
+      <a href="https://app.breakertools.pro/api/start-trial?plan=founder" class="nav-cta">Start free trial</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow">Free tool · no account needed</div>
+    <h1>The Free <span class="accent">Break Calculator</span></h1>
+    <p>Know your break-even price and profit per spot <em>before</em> you go live. Enter your box cost, spots, and platform, and get the exact price to charge — Whatnot, TikTok Shop, and eBay Live fees built in, plus a custom field for Fanatics Live.</p>
+    <a href="https://app.breakertools.pro/calculator" class="hero-cta">Open the free Break Calculator →</a>
+    <div class="hero-fine">No account required · Runs right in your browser</div>
+    <div class="shot"><img src="/shot-calculator.jpg" alt="Breaker Tools Pro Break Calculator showing break-even price per spot, ROI target, and pricing tiers with platform fees" width="1920" height="984" /></div>
+  </div>
+</header>
+
+<section class="content">
+  <div class="narrow">
+    <h2>How the break calculator works</h2>
+    <p>Most breakers price by feel, then find out days later — when the payout hits — that the "profitable" break actually lost money once platform fees came out. The calculator removes the guesswork by working out the one number that matters most: your <strong>break-even price per spot</strong>, the price where you stop losing money before any profit.</p>
+
+    <h3>The formula</h3>
+    <p>Break-even isn't just cost divided by spots. The platform takes its cut off the top of every sale, so you have to gross that back up:</p>
+    <div class="formula">Break-even per spot = (Total cost ÷ Spots + flat fee) ÷ (1 − Platform fee %)</div>
+    <p>The division at the end is the part most breakers skip. Subtracting the fee from your price understates what you need to charge, because the fee also applies to the extra you add to cover the fee. Dividing by (1 − fee%) is what actually gets you back to even.</p>
+
+    <h3>A worked example</h3>
+    <p>Say a box cost you <strong>$450</strong>, you're adding <strong>$20</strong> in extra costs (shipping, supplies), and selling <strong>32 spots</strong> on Whatnot at a typical ~11% take:</p>
+    <div class="formula">($470 ÷ 32 + $0.30) ÷ (1 − 0.109) = $16.82 break-even per spot</div>
+    <p>Notice that's more than the naive "$470 ÷ 32 = $14.69." The $2.13 gap per spot is the platform's cut you'd have quietly eaten. Across 32 spots that's about $68 — often the entire difference between a profitable break and a losing one. The calculator does this instantly and shows your price at conservative, standard, and aggressive margin tiers.</p>
+
+    <h2>What the platforms take</h2>
+    <table>
+      <tr><th>Platform</th><th>Typical seller cost (as of this writing)</th></tr>
+      <tr><td>Whatnot</td><td>8% commission + 2.9% processing + $0.30 per order (~10.9% + flat)</td></tr>
+      <tr><td>TikTok Shop</td><td>~6% + $0.30 per order (promo rates vary; standard is higher)</td></tr>
+      <tr><td>eBay Live</td><td>~12.35% + $0.40 per order, typical for cards under $7,500</td></tr>
+      <tr><td>Fanatics Live</td><td>Enter your current rate in the custom fee field</td></tr>
+    </table>
+    <p>Fees change, and can vary by category or promotion, so treat these as starting points and confirm your real rate in your seller dashboard. The calculator lets you type in your exact number for any platform.</p>
+
+    <h2>Frequently asked questions</h2>
+    <details><summary>Is the $1 start safe with this?</summary><p>Yes — that's exactly what knowing your break-even is for. Start spots low to build energy, but go live knowing the floor you need the room to clear. In the full app, your live profit updates on the <a href="/obs-scoreboard">OBS scoreboard</a> in real time so you can steer the break as it happens.</p></details>
+    <details><summary>Does this work for TCG breaks like Pokémon?</summary><p>Yes. The math is identical for sports and TCG — box cost, spots, platform fee. Whether it's an NFL hobby box or a Pokémon booster case, break-even per spot works the same way.</p></details>
+    <details><summary>How is the full version different?</summary><p>This calculator gives you the numbers for one break. The full Breaker Tools Pro app saves every break, tracks live profit on your stream, generates your show title, thumbnail and notes, builds break lists in seconds, and gives you analytics and a buyer CRM afterward.</p></details>
+
+    <p style="margin-top:32px">Want the deeper strategy behind these numbers? Read <a href="/blog/whatnot-fee-calculator">how Whatnot fees actually work</a> on the blog, or see the <a href="/obs-scoreboard">OBS scoreboard for card breaks</a>.</p>
+
+    <div class="cta-band">
+      <h2>Run your whole break in one place</h2>
+      <p>The calculator is free. Breaker Tools Pro's full suite adds live profit tracking, break lists, show setup, and analytics — free for 7 days.</p>
+      <a href="https://app.breakertools.pro/api/start-trial?plan=founder" class="hero-cta">Start your free trial →</a>
+      <p class="fine">7-day free trial · No charge until day 8 · 30-day money-back guarantee</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <span>© 2026 Breaker Tools Pro</span>
+    <span><a href="/">Home</a><a href="/obs-scoreboard">OBS Scoreboard</a><a href="/blog/">Blog</a><a href="https://app.breakertools.pro/privacy">Privacy</a></span>
+  </div>
+</footer>
+
 </body>
 </html>

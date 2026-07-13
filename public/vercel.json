@@ -31,12 +31,5 @@
         }
       ]
     }
-  ],
-  "redirects": [
-    {
-      "source": "/break-calculator",
-      "destination": "https://app.breakertools.pro/calculator",
-      "permanent": false
-    }
   ]
 }
