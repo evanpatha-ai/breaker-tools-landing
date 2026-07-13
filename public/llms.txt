@@ -1,11 +1,11 @@
 # Breaker Tools Pro
 
-> Breaker Tools Pro is all-in-one card breaking software for sports card and TCG breakers who run live breaks on Whatnot, Fanatics Live, TikTok Shop, and eBay Live. It is one connected system that plans a break, tracks live profit on an OBS scoreboard while you stream, runs a provably-fair spinner, generates AI break lists and show setups, and reports profit analytics with a buyer CRM.
+> Breaker Tools Pro is all-in-one card breaking software for sports card and TCG breakers who run live breaks on Whatnot, TikTok Shop, and eBay Live. It is one connected system that plans a break, tracks live profit on an OBS scoreboard while you stream, runs a provably-fair spinner, generates AI break lists and show setups, and reports profit analytics with a buyer CRM.
 
 Breaker Tools Pro is built by breakers, for breakers. It replaces the usual stack of spreadsheets, ChatGPT tabs, sticky notes, and one-off Fiverr overlays with a single tool. The core promise: know your profit before, during, and after every break, instead of finding out days later when the payout hits.
 
 ## What it does
-- **Break calculator**: fee-aware break-even and profit pricing per spot, with built-in fee presets for Whatnot, TikTok Shop, and eBay Live (plus a custom fee field for other platforms such as Fanatics Live). Free, no account required.
+- **Break calculator**: fee-aware break-even and profit pricing per spot, with built-in fee presets for Whatnot, TikTok Shop, and eBay Live (plus a custom fee field for other platforms). Free, no account required.
 - **Live OBS scoreboard / overlay**: a stream overlay built specifically for card breaks (not a generic sports scorebug). Shows real-time profit, revenue, and spots sold; installs as a single OBS browser source.
 - **Provably-fair spinner**: transparent random team/slot assignment with per-platform compliance.
 - **AI break lists**: auto-generates player and character break lists for any sport or TCG set.
@@ -13,7 +13,7 @@ Breaker Tools Pro is built by breakers, for breakers. It replaces the usual stac
 - **Analytics + buyer CRM**: profit by break/product/category, recommended next break, and dormant-buyer winback.
 
 ## Platforms supported
-Whatnot, Fanatics Live, TikTok Shop, eBay Live. The scoreboard, spinner, break lists, and analytics work on any live-selling platform; the calculator has fee presets for Whatnot, TikTok Shop, and eBay Live plus a custom option.
+Whatnot, TikTok Shop, eBay Live. The scoreboard, spinner, break lists, and analytics work on any live-selling platform; the calculator has fee presets for Whatnot, TikTok Shop, and eBay Live plus a custom option.
 
 ## Pricing
 - 7-day free trial of the full suite (no charge until day 8).
