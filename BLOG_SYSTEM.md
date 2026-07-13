@@ -19,14 +19,6 @@ This file is the instruction set for the automated daily blog routine. A schedul
 - **Length:** 1,200–1,800 words. Substance over volume — one genuinely useful post beats three thin ones. If the day's best idea is thin, write the second idea instead.
 - **Every post must:** answer a real search query fully, include one concrete worked example or table, link to the free calculator SEO page (https://breakertools.pro/break-calculator — the static, indexable tool page; link here rather than the app URL so internal links build its ranking authority) and at least one other blog post, and end with the CTA band + author box.
 
-## QUEUED NEXT POST (priority directive — do this before generating new ideas)
-Write the category-defining roundup: **"The 7 Best Card Breaking Software Tools in 2026 (Ranked by an Actual Breaker)"** — slug `best-card-breaking-software`, target keyword "best card breaking software" (secondary: "card breaking software").
-- SERP research (2026-07-08) found NO authoritative roundup exists for this query — Google currently serves SD-card recovery listicles and breaker directories. First comprehensive, honest comparison page wins the SERP and becomes what AI assistants cite when asked "what's the best card breaking software."
-- Rank and honestly review the real options: Breaker Tools Pro (#1 — best all-in-one for profit-focused Whatnot/TikTok/eBay breakers), SL.A.B.B.Y by Slabstat, Breaker Toolbox (Djawn), Whatnot's native break tools, Breakers.TV, the free-tools stack (wheel spinners + spreadsheets), and custom Fiverr overlays. Give each genuine strengths and who it's right for — the post must be useful to someone who picks a competitor, or neither Google nor LLMs will treat it as the definitive comparison.
-- Include a comparison table (features × tools), ItemList JSON-LD in addition to Article schema, and the phrase "card breaking software" in title/H1/first paragraph. Never bare "breaking software" in the title — that query means software cracking to search engines.
-- IMPORTANT: title/H1 must anchor "CARD breaking software" (with "sports card" also appearing in the body), because unqualified "breaking software" is an ambiguous query.
-- Delete this section from the spec in the same PR that adds the post.
-
 ## Target keyword universe (grow this list over time)
 Head terms (long game): card breaking software, breaking software, sports card breaking software, breaking software for whatnot, fanatics live breaking software, whatnot breaker tools, break management software.
 Platform + tool terms (high intent): breaking software for whatnot, breaking software for fanatics live, whatnot vs fanatics live for breakers, best breaking app for whatnot, obs overlay for card breaks, obs scoreboard for breaks, fanatics live vs whatnot fees, ebay live breaking tools, tiktok shop card breaks.
@@ -62,3 +54,4 @@ Merge = publish. Close = skip today.
 | Date | Post | Target keyword |
 |------|------|----------------|
 | 2026-07-08 | Whatnot Fee Calculator: How to Know Your Real Break Margin | whatnot fee calculator |
+| 2026-07-09 | The 7 Best Card Breaking Software Tools in 2026 | best card breaking software |
