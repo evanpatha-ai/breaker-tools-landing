@@ -31,7 +31,7 @@
     "applicationSubCategory": "Live Stream Overlay",
     "operatingSystem": "Web, OBS Studio",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "Included with a Breaker Tools Pro subscription; 14-day free trial." },
-    "description": "A live OBS scoreboard overlay for sports card and TCG breaks. Displays real-time profit, revenue, and spots sold, includes a provably-fair spinner, and installs as a single OBS browser source. Works with Whatnot, TikTok Shop, and eBay Live.",
+    "description": "A live OBS scoreboard overlay for sports card and TCG breaks. Displays real-time profit, revenue, and spots sold, includes a provably-fair spinner and a customizable scrolling announcement bar for prices and promos, and installs as a single OBS browser source. Works with Whatnot, TikTok Shop, and eBay Live.",
     "publisher": { "@type": "Organization", "name": "Breaker Tools Pro", "url": "https://breakertools.pro/" }
   }
   </script>
@@ -56,7 +56,8 @@
     "mainEntity": [
       { "@type": "Question", "name": "Is there an OBS overlay made specifically for card breaks?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Breaker Tools Pro's scoreboard is built for card breaks, not repurposed from a generic sports scorebug. It shows live profit, revenue, and spots sold for your break, and includes a provably-fair spinner for assigning teams or slots." } },
       { "@type": "Question", "name": "How do I add the scoreboard to OBS?", "acceptedAnswer": { "@type": "Answer", "text": "Copy your break's scoreboard URL, add a Browser source in OBS Studio, and paste the URL. That's it — no plugins or editing software. Most breakers are live in under 5 minutes." } },
-      { "@type": "Question", "name": "Does the OBS scoreboard work with Whatnot, TikTok, and eBay?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The scoreboard is a browser overlay in OBS, so it works on any platform you stream to — Whatnot, TikTok Shop, or eBay Live." } }
+      { "@type": "Question", "name": "Does the OBS scoreboard work with Whatnot, TikTok, and eBay?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The scoreboard is a browser overlay in OBS, so it works on any platform you stream to — Whatnot, TikTok Shop, or eBay Live." } },
+      { "@type": "Question", "name": "Can I show my prices and promos on the overlay?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The overlay includes a customizable scrolling announcement bar — put your spot prices, PYT rates, discount codes, or a contact number in it and it loops across the bottom of your stream for the whole break." } }
     ]
   }
   </script>
@@ -138,7 +139,7 @@
   <div class="container">
     <div class="eyebrow">Built for breaks · not a generic scorebug</div>
     <h1>The OBS Scoreboard <span class="accent">Built for Card Breaks</span></h1>
-    <p>Show live profit, revenue, and spots sold right on your stream. A real card-breaking overlay for OBS — with a provably-fair spinner built in — that drops into Whatnot, TikTok Shop, or eBay Live as a single browser source.</p>
+    <p>Show live profit, revenue, and spots sold right on your stream. A real card-breaking overlay for OBS — with a provably-fair spinner and a scrolling announcement bar built in — that drops into Whatnot, TikTok Shop, or eBay Live as a single browser source.</p>
     <a href="https://app.breakertools.pro/api/start-trial?plan=founder" class="hero-cta">Start your 14-day free trial →</a>
     <div class="hero-fine">No charge until day 15 · 30-day money-back guarantee</div>
     <div class="shot"><img src="/shot-scoreboard.jpg" alt="Breaker Tools Pro live OBS scoreboard overlay showing profit, revenue, spots sold, and the team board with spinner" width="1920" height="984" /></div>
@@ -150,6 +151,7 @@
     <div class="feature-grid">
       <div class="fcard"><h3>Live profit on screen</h3><p>Your real-time profit, revenue, and spots-sold counter update as the break runs — so you steer toward your number instead of guessing.</p></div>
       <div class="fcard"><h3>Provably-fair spinner</h3><p>A built-in random spinner assigns teams and slots transparently, so your room trusts every result. Per-platform compliance kept current.</p></div>
+      <div class="fcard"><h3>Scrolling announcement bar</h3><p>A customizable ticker runs across the bottom of your overlay — put your spot prices, PYT rates, discount codes, and a text-for-deals number in front of every viewer, on loop.</p></div>
       <div class="fcard"><h3>One browser source</h3><p>No plugins, no video editing. Paste one URL into an OBS Browser source and you're live. Works on any streaming platform.</p></div>
     </div>
   </div>
@@ -170,10 +172,14 @@
       <li><strong>Go live</strong> — profit, revenue, and spots sold update in real time as the break runs.</li>
     </ol>
 
+    <h2>A scrolling announcement bar built in</h2>
+    <p>Under the team board runs a <strong>customizable scrolling ticker</strong> — the same spot most breakers pay a designer for or never have at all. Load it with your spot prices, PYT rates, discount codes, giveaway rules, or a "text this number for deals" line, and it loops across the bottom of your stream all show long. It's part of the same overlay, so there's nothing extra to install: your pricing and promos stay in front of every viewer while the break runs.</p>
+
     <h2>Works on every breaking platform</h2>
     <p>Because the scoreboard is a browser overlay inside OBS, it works with whatever platform you stream to — <strong>Whatnot, TikTok Shop, or eBay Live</strong>. Switch platforms and your overlay comes with you. Pair it with the free <a href="/break-calculator">break calculator</a> to lock in your pricing before you go live, and the <a href="/">full Breaker Tools Pro suite</a> to generate break lists and show setups.</p>
 
     <h2>Frequently asked questions</h2>
+    <details><summary>Can I show my prices and promos on the overlay?</summary><p>Yes. The overlay includes a customizable scrolling announcement bar — put your spot prices, PYT rates, discount codes, or a contact number in it and it loops across the bottom of your stream the whole break.</p></details>
     <details><summary>Is this a free OBS overlay?</summary><p>The scoreboard is included with a Breaker Tools Pro subscription, which starts with a 14-day free trial. The <a href="/break-calculator">break calculator</a> is free forever with no account.</p></details>
     <details><summary>Do I need editing or design skills?</summary><p>No. It's a single OBS Browser source — paste a URL and it renders. No plugins, no After Effects, no template editing.</p></details>
     <details><summary>Does it update automatically as spots sell?</summary><p>Yes. It reads from your planned break, so profit, revenue, and spots-sold move in real time without anyone updating numbers by hand.</p></details>
