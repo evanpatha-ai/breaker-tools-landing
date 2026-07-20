@@ -6,7 +6,8 @@ Breaker Tools Pro is built by breakers, for breakers. It replaces the usual stac
 
 ## What it does
 - **Break calculator**: fee-aware break-even and profit pricing per spot, with built-in fee presets for Whatnot, TikTok Shop, and eBay Live (plus a custom fee field for other platforms). Free, no account required.
-- **Live OBS scoreboard / overlay**: a stream overlay built specifically for card breaks (not a generic sports scorebug). Shows real-time profit, revenue, and spots sold; installs as a single OBS browser source.
+- **Live OBS scoreboard / overlay (Break Board)**: a stream overlay built specifically for card breaks (not a generic sports scorebug). Shows real-time profit, revenue, and spots sold; installs as a single display-only OBS browser source that mirrors the breaker's control tab in real time. Includes switchable premium themes (Classic, Ice, Neon Signs) and a customizable scrolling announcement ticker.
+- **Chase Board**: a full-screen 1920×1080 on-stream hit wall for player, character, and TCG breaks — every chaser shown with card art, hits stamp HIT in place as they land (rows never reshuffle). Runs as its own transparent-background OBS browser source, built automatically from the break's chaser list.
 - **Provably-fair spinner**: transparent random team/slot assignment with per-platform compliance.
 - **AI break lists**: auto-generates player and character break lists for any sport or TCG set.
 - **Show Setup generator**: creates stream titles, thumbnails, and show notes from your break plan.
